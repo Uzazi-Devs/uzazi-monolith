@@ -1,0 +1,29 @@
+{
+	admin off
+	auto_https off
+}
+
+# Marketing site
+uzazi.localhost {
+	reverse_proxy marketing-astro:4321
+}
+
+# Mother-facing app
+app.localhost {
+	reverse_proxy app-nextjs:3001
+}
+
+# Admin / health-worker dashboard
+admin.localhost {
+	reverse_proxy admin-svelte:5173
+}
+
+# BetterAuth — the single auth origin
+auth.localhost {
+	reverse_proxy auth-service:3000
+}
+
+# Backend API
+api.localhost {
+	reverse_proxy backend:8080
+}

@@ -1,0 +1,24 @@
+name: nextjs-ci
+on:
+  push:
+    paths:
+      - "frontends/app-nextjs/**"
+      - ".github/workflows/nextjs-ci.yml"
+  pull_request:
+    paths:
+      - "frontends/app-nextjs/**"
+      - ".github/workflows/nextjs-ci.yml"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontends/app-nextjs
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: npm install
+      - run: npm run build

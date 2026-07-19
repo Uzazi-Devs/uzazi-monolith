@@ -1,0 +1,42 @@
+name: backend-ci
+on:
+  push:
+    paths:
+      - "backend/**"
+      - "db/**"
+      - ".github/workflows/backend-ci.yml"
+  pull_request:
+    paths:
+      - "backend/**"
+      - "db/**"
+      - ".github/workflows/backend-ci.yml"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.22"
+
+      - name: Install sqlc
+        run: go install github.com/sqlc-dev/sqlc/cmd/sqlc@latest
+
+      # Fail the build if the committed generated code is stale vs migrations.
+      - name: sqlc generate --check
+        working-directory: db
+        run: |
+          sqlc generate
+          git diff --exit-code ../backend/internal/db
+
+      - name: go vet + test
+        working-directory: backend
+        run: |
+          go mod tidy
+          go vet ./...
+          go test ./...
+
+      - name: docker build
+        run: docker build -t uzazi-backend ./backend

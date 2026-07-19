@@ -1,0 +1,26 @@
+# Go
+/backend/bin/
+*.exe
+
+# Node
+node_modules/
+.pnpm-store/
+dist/
+.next/
+.svelte-kit/
+.astro/
+build/
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# Caddy / docker
+caddy_data/
+caddy_config/
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/

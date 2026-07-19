@@ -1,0 +1,107 @@
+name: uzazi
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: uzazi
+      POSTGRES_PASSWORD: uzazi
+      POSTGRES_DB: uzazi
+    ports: ["5432:5432"]
+    volumes: ["pgdata:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U uzazi"]
+      interval: 3s
+      timeout: 3s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    ports: ["6379:6379"]
+
+  # Runs db/migrations against postgres ONCE, before backend/auth-service.
+  # This is the only migration runner — no ORM auto-migrates on its own.
+  migrate:
+    image: migrate/migrate:latest
+    volumes: ["../db/migrations:/migrations:ro"]
+    command:
+      [
+        "-path=/migrations",
+        "-database=postgres://uzazi:uzazi@postgres:5432/uzazi?sslmode=disable",
+        "up",
+      ]
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: on-failure
+
+  auth-service:
+    build: ../services/auth-service
+    environment:
+      DATABASE_URL: postgres://uzazi:uzazi@postgres:5432/uzazi?sslmode=disable
+      BETTER_AUTH_URL: http://localhost:3000
+      BETTER_AUTH_SECRET: dev-secret-change-me-0123456789abcdef
+      NEXT_PUBLIC_AUTH_URL: http://localhost:3000
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    ports: ["3000:3000"]
+
+  backend:
+    build: ../backend
+    environment:
+      PORT: "8080"
+      DATABASE_URL: postgres://uzazi:uzazi@postgres:5432/uzazi?sslmode=disable
+      AUTH_JWKS_URL: http://auth-service:3000/api/auth/jwks
+      AI_PROVIDER: gemma
+      REDIS_URL: redis://redis:6379
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    ports: ["8080:8080"]
+
+  # Frontends run their dev servers straight from the mounted source — no
+  # per-frontend Dockerfile needed for local dev.
+  marketing-astro:
+    image: node:20-alpine
+    working_dir: /app
+    volumes: ["../frontends/marketing-astro:/app"]
+    command: sh -c "npm install && npm run dev"
+    environment:
+      PUBLIC_AUTH_URL: http://localhost:3000
+      PUBLIC_BACKEND_URL: http://localhost:8080
+    ports: ["4321:4321"]
+
+  admin-svelte:
+    image: node:20-alpine
+    working_dir: /app
+    volumes: ["../frontends/admin-svelte:/app"]
+    command: sh -c "npm install && npm run dev"
+    environment:
+      PUBLIC_AUTH_URL: http://localhost:3000
+      PUBLIC_BACKEND_URL: http://localhost:8080
+    ports: ["5173:5173"]
+
+  app-nextjs:
+    image: node:20-alpine
+    working_dir: /app
+    volumes: ["../frontends/app-nextjs:/app"]
+    command: sh -c "npm install && npm run dev"
+    environment:
+      NEXT_PUBLIC_AUTH_URL: http://localhost:3000
+      NEXT_PUBLIC_BACKEND_URL: http://localhost:8080
+    ports: ["3001:3001"]
+
+  caddy:
+    image: caddy:2-alpine
+    volumes: ["./caddy/Caddyfile:/etc/caddy/Caddyfile:ro"]
+    ports: ["80:80"]
+    depends_on:
+      - backend
+      - auth-service
+      - marketing-astro
+      - admin-svelte
+      - app-nextjs
+
+volumes:
+  pgdata:
