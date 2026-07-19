@@ -8,6 +8,16 @@ Use Bun, not npm, for all JavaScript/TypeScript work in this repository:
 - `bun run <script>` instead of `npm run <script>`
 - `bunx <pkg>` instead of `npx <pkg>`
 
+## Secrets and environment variables
+
+Secrets are injected with [Doppler](https://www.doppler.com/), not `.env` files:
+
+- Run services through Doppler, e.g. `doppler run -- bun run dev` or `doppler run -- go run ./cmd/...`.
+- Never commit secrets, `.env` files, or hardcoded credentials. Read config from environment variables only.
+- Never print, log, or echo secret values, including in debug output or CI logs.
+- When adding a new required env var, document its name (never its value) in the relevant README and call it out in the PR description so it can be added to the Doppler project.
+- Local fallback defaults in code are fine only for non-secret dev values (ports, localhost URLs).
+
 ## Styling
 
 Use Tailwind CSS (v4) for all frontend styling. Every frontend under
