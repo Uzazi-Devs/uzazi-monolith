@@ -8,6 +8,18 @@ Use Bun, not npm, for all JavaScript/TypeScript work in this repository:
 - `bun run <script>` instead of `npm run <script>`
 - `bunx <pkg>` instead of `npx <pkg>`
 
+## Styling
+
+Use Tailwind CSS (v4) for all frontend styling. Every frontend under
+`frontends/` has Tailwind set up:
+
+- `app-nextjs`: via `@tailwindcss/postcss` (`postcss.config.mjs`), imported in `app/globals.css`
+- `admin-svelte`: via `@tailwindcss/vite` (`vite.config.ts`), imported in `src/app.css`
+- `marketing-astro`: via `@tailwindcss/vite` (`astro.config.mjs`), imported in `src/styles/global.css`
+
+Prefer Tailwind utility classes over inline `style` attributes or ad hoc CSS.
+Tailwind v4 needs no `tailwind.config.js`; add theme tokens with `@theme` in the CSS entry file.
+
 ## Pull request and git push rules
 
 These rules apply to all work in this repository.

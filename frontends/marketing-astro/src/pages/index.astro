@@ -1,4 +1,6 @@
 ---
+import "../styles/global.css";
+
 const BACKEND = import.meta.env.PUBLIC_BACKEND_URL ?? "http://localhost:8080";
 const AUTH = import.meta.env.PUBLIC_AUTH_URL ?? "http://localhost:3000";
 
@@ -17,7 +19,7 @@ try {
     <meta name="viewport" content="width=device-width" />
     <title>uzazi</title>
   </head>
-  <body style="font-family: sans-serif; max-width: 640px; margin: 4rem auto;">
+  <body class="mx-auto my-16 max-w-2xl font-sans">
     <h1>uzazi</h1>
     <p>Healthcare, closer to every mother.</p>
     <p>Backend <code>/healthz</code> (checked at build): <b>{health}</b></p>
