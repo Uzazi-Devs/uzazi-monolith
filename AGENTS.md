@@ -1,5 +1,13 @@
 # AGENTS.md
 
+## Tooling
+
+Use Bun, not npm, for all JavaScript/TypeScript work in this repository:
+
+- `bun install` instead of `npm install`
+- `bun run <script>` instead of `npm run <script>`
+- `bunx <pkg>` instead of `npx <pkg>`
+
 ## Pull request and git push rules
 
 These rules apply to all work in this repository.

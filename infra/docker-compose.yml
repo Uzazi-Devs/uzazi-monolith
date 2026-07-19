@@ -63,30 +63,30 @@ services:
   # Frontends run their dev servers straight from the mounted source — no
   # per-frontend Dockerfile needed for local dev.
   marketing-astro:
-    image: node:20-alpine
+    image: oven/bun:1-alpine
     working_dir: /app
     volumes: ["../frontends/marketing-astro:/app"]
-    command: sh -c "npm install && npm run dev"
+    command: sh -c "bun install && bun run dev"
     environment:
       PUBLIC_AUTH_URL: http://localhost:3000
       PUBLIC_BACKEND_URL: http://localhost:8080
     ports: ["4321:4321"]
 
   admin-svelte:
-    image: node:20-alpine
+    image: oven/bun:1-alpine
     working_dir: /app
     volumes: ["../frontends/admin-svelte:/app"]
-    command: sh -c "npm install && npm run dev"
+    command: sh -c "bun install && bun run dev"
     environment:
       PUBLIC_AUTH_URL: http://localhost:3000
       PUBLIC_BACKEND_URL: http://localhost:8080
     ports: ["5173:5173"]
 
   app-nextjs:
-    image: node:20-alpine
+    image: oven/bun:1-alpine
     working_dir: /app
     volumes: ["../frontends/app-nextjs:/app"]
-    command: sh -c "npm install && npm run dev"
+    command: sh -c "bun install && bun run dev"
     environment:
       NEXT_PUBLIC_AUTH_URL: http://localhost:3000
       NEXT_PUBLIC_BACKEND_URL: http://localhost:8080
