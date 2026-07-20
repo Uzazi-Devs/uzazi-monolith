@@ -18,14 +18,12 @@ export const auth = betterAuth({
 
   emailAndPassword: { enabled: true },
 
-  socialProviders: process.env.GOOGLE_CLIENT_ID
-    ? {
+  socialProviders: {
         google: {
-          clientId: process.env.GOOGLE_CLIENT_ID,
-          clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+          clientId: process.env.GOOGLE_CLIENT_ID!,
+          clientSecret: process.env.GOOGLE_CLIENT_SECRET! as string,
         },
-      }
-    : undefined,
+  },
 
   // jwt() publishes a JWKS at /api/auth/jwks — the Go backend verifies tokens
   // against it. bearer() lets non-cookie clients authenticate with
