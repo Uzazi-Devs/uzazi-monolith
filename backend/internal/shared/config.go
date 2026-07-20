@@ -2,15 +2,6 @@ package shared
 
 import "os"
 
-// Config is loaded from the environment. Defaults target local `docker compose`.
-type Config struct {
-	Port        string
-	DatabaseURL string
-	AuthJWKSURL string
-	AIProvider  string
-	RedisURL    string
-}
-
 func Load() Config {
 	return Config{
 		Port:        env("PORT", "8080"),

@@ -6,7 +6,7 @@
     "dev": "next dev -p 3000",
     "build": "next build",
     "start": "next start -p 3000",
-    "auth:generate": "npx @better-auth/cli@latest generate"
+    "auth:generate": "bunx @better-auth/cli@latest generate"
   },
   "dependencies": {
     "better-auth": "^1.2.0",

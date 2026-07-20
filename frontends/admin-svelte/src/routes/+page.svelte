@@ -17,10 +17,10 @@
   });
 </script>
 
-<main style="font-family: sans-serif; max-width: 520px; margin: 4rem auto;">
+<main class="mx-auto my-16 max-w-lg font-sans">
   <h1>uzazi · admin</h1>
   <p>Health-worker / admin dashboard shell.</p>
   <p>Backend <code>/healthz</code>: <b>{health}</b></p>
   <p>Session: {$session.data ? $session.data.user.email : "signed out"}</p>
-  <button onclick={() => authClient.signIn.social({ provider: "github" })}>Sign in</button>
+  <button onclick={() => authClient.signIn.social({ provider: "google" })}>Sign in</button>
 </main>

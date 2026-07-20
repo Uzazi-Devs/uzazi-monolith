@@ -55,7 +55,7 @@ auto-migrates on its own — that's what keeps the two consumers from diverging.
 2. Run `sqlc generate` from `db/` — regenerates `backend/internal/db`.
    **Never edit generated code by hand.**
 3. If the change touches auth tables (`user`/`session`/`account`/`verification`),
-   run `npm run auth:generate` in `services/auth-service`, fold any diff back
+   run `bun run auth:generate` in `services/auth-service`, fold any diff back
    into `db/migrations/`, and update the field mapping in `lib/auth.ts`.
 
 CI (`backend-ci`) runs `sqlc generate` and fails if the committed code is stale.

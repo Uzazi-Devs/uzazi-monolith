@@ -8,7 +8,7 @@ import { Pool } from "pg";
 //
 // Workflow when auth tables change:
 //   1. edit db/migrations/
-//   2. run `npm run auth:generate` to see BetterAuth's expected schema
+//   2. run `bun run auth:generate` to see BetterAuth's expected schema
 //   3. hand-fold any diff INTO db/migrations/ (never keep a second schema)
 //   4. keep the field names below in sync
 export const auth = betterAuth({
@@ -18,11 +18,11 @@ export const auth = betterAuth({
 
   emailAndPassword: { enabled: true },
 
-  socialProviders: process.env.GITHUB_CLIENT_ID
+  socialProviders: process.env.GOOGLE_CLIENT_ID
     ? {
-        github: {
-          clientId: process.env.GITHUB_CLIENT_ID,
-          clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
+        google: {
+          clientId: process.env.GOOGLE_CLIENT_ID,
+          clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
         },
       }
     : undefined,

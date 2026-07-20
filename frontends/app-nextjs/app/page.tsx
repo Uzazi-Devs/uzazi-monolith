@@ -17,7 +17,7 @@ export default function Page() {
   }, []);
 
   return (
-    <main style={{ fontFamily: "sans-serif", maxWidth: 480, margin: "4rem auto" }}>
+    <main className="mx-auto my-16 max-w-md font-sans">
       <h1>uzazi · app</h1>
       <p>Mother-facing app shell.</p>
       <p>
@@ -27,8 +27,8 @@ export default function Page() {
       {session ? (
         <button onClick={() => authClient.signOut()}>Sign out</button>
       ) : (
-        <button onClick={() => authClient.signIn.social({ provider: "github" })}>
-          Sign in with GitHub
+        <button onClick={() => authClient.signIn.social({ provider: "google" })}>
+          Sign in with Google
         </button>
       )}
     </main>

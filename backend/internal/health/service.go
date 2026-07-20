@@ -5,16 +5,8 @@ import (
 
 	"github.com/jackc/pgx/v5/pgtype"
 
-	"github.com/deluxesande/uzazi/backend/internal/db"
+	"github.com/deluxesande/uzazi-monolith/backend/internal/db"
 )
-
-// Service is how other modules use health records — a Go interface, no HTTP.
-type Service interface {
-	CreateRecord(ctx context.Context, userID, kind, triageLevel, notes string) (db.HealthRecord, error)
-	ListForUser(ctx context.Context, userID string) ([]db.HealthRecord, error)
-}
-
-type service struct{ q *db.Queries }
 
 func NewService(q *db.Queries) Service { return &service{q: q} }
 
