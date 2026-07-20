@@ -30,6 +30,23 @@ Use Tailwind CSS (v4) for all frontend styling. Every frontend under
 Prefer Tailwind utility classes over inline `style` attributes or ad hoc CSS.
 Tailwind v4 needs no `tailwind.config.js`; add theme tokens with `@theme` in the CSS entry file.
 
+## Code organization
+
+One function per file, named after the operation it performs. This applies to
+HTTP handlers, service methods, and analysis/processing functions alike:
+
+- Name the file after the operation: `get.go`, `create.go` / `post.go`,
+  `update.go` / `put.go`, `delete.go`, `list.go`, `analyze.go`, etc.
+- Group the files by module/resource, e.g.
+  `backend/internal/health/get.go`, `backend/internal/health/create.go`,
+  `backend/internal/community/post.go`.
+- Shared types, interfaces, and constructors for a module stay in a small
+  `service.go` (or equivalent) in that module's directory.
+- Same rule for TypeScript: one route handler or server function per file,
+  e.g. Next.js route handlers split by method where the framework allows.
+- Keep helpers used by only one function in that function's file. Promote a
+  helper to a shared file only when a second caller appears.
+
 ## Pull request and git push rules
 
 These rules apply to all work in this repository.
