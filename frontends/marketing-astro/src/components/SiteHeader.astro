@@ -1,0 +1,42 @@
+---
+import ButtonLink from "./ButtonLink.astro";
+import Icon from "./Icon.astro";
+
+interface Props { authUrl: string; }
+const { authUrl } = Astro.props;
+
+const links = [
+  { href: "#experience", label: "Experience" },
+  { href: "#stories", label: "Stories" },
+  { href: "#join", label: "Join the village" },
+];
+---
+
+<header class="sticky inset-x-0 top-0 z-40 border-b border-petal/40 bg-canvas/95 backdrop-blur-md">
+  <div class="page-shell flex min-h-16 items-center justify-between gap-6">
+    <a href="#top" class="flex min-h-11 items-center gap-2 font-bold text-bloom focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-bloom" aria-label="Uzazi home">
+      <Icon name="flower" class="size-6" />
+      <span>Uzazi</span>
+    </a>
+
+    <nav class="hidden items-center gap-7 md:flex" aria-label="Primary navigation">
+      {links.map((link) => (
+        <a href={link.href} class="text-sm font-medium text-copy transition hover:text-bloom focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-bloom">{link.label}</a>
+      ))}
+      <ButtonLink href={authUrl} class="min-h-11 px-6 py-2.5">Start your journey</ButtonLink>
+    </nav>
+
+    <details class="group relative md:hidden">
+      <summary class="flex min-h-11 cursor-pointer list-none items-center gap-2 rounded-lg px-3 text-sm font-medium text-copy transition hover:bg-soft [&::-webkit-details-marker]:hidden">
+        <Icon name="menu" class="size-5" />
+        Menu
+      </summary>
+      <nav class="absolute right-0 top-[calc(100%+.5rem)] flex w-56 flex-col rounded-xl bg-white p-2 shadow-[0_8px_18px_rgba(45,32,35,.12)] ring-1 ring-petal" aria-label="Mobile navigation">
+        {links.map((link) => (
+          <a href={link.href} class="flex min-h-11 items-center rounded-lg px-4 text-sm font-medium text-copy hover:bg-soft hover:text-bloom">{link.label}</a>
+        ))}
+        <ButtonLink href={authUrl} class="mt-2 min-h-11 px-5 py-2.5">Start your journey</ButtonLink>
+      </nav>
+    </details>
+  </div>
+</header>

@@ -1,13 +1,11 @@
 ---
 interface Props {
-  eyebrow: string;
   title: string;
   align?: "center" | "left";
 }
-const { eyebrow, title, align = "center" } = Astro.props;
+const { title, align = "center" } = Astro.props;
 ---
 
-<header class:list={["space-y-4", align === "center" && "text-center"]}>
-  <p class="text-xs font-medium uppercase tracking-[0.24em] text-bloom">{eyebrow}</p>
+<header class:list={[align === "center" && "text-center"]}>
   <h2 class="text-balance text-3xl font-medium tracking-[-0.025em] text-ink sm:text-4xl">{title}</h2>
 </header>

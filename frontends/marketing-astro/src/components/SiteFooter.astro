@@ -1,0 +1,56 @@
+---
+import Icon from "./Icon.astro";
+
+interface Props { authUrl: string; }
+const { authUrl } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer id="join" class="bg-plum text-white">
+  <div class="page-shell py-16 sm:py-20">
+    <div class="grid items-end gap-10 border-b border-white/15 pb-14 lg:grid-cols-[.9fr_1.1fr] lg:gap-20">
+      <div>
+        <Icon name="flower" class="mb-6 size-9 text-rose" />
+        <h2 class="max-w-[14ch] text-balance text-4xl font-semibold tracking-[-0.035em] sm:text-5xl">Join the village</h2>
+        <p class="mt-5 max-w-[48ch] text-pretty leading-7 text-white/75">Receive weekly wisdom, ritual reminders, and heartwarming stories from our community of mamas.</p>
+      </div>
+
+      <div>
+        <form id="newsletter-form" class="flex flex-col gap-3 sm:flex-row">
+          <label class="sr-only" for="email">Your email address</label>
+          <input id="email" name="email" type="email" autocomplete="email" required placeholder="Your email address" class="min-h-12 flex-1 rounded-xl bg-white px-5 text-sm text-ink outline-none ring-1 ring-transparent transition placeholder:text-copy focus:ring-2 focus:ring-rose" />
+          <button type="submit" class="min-h-12 rounded-xl bg-rose px-7 py-3 text-sm font-semibold text-plum transition duration-300 hover:-translate-y-0.5 hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rose active:translate-y-0">Join the Garden</button>
+        </form>
+        <p id="newsletter-status" class="mt-4 min-h-5 text-xs text-white/60" aria-live="polite">We honor your privacy like a sacred space. No spam, ever.</p>
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-8 pt-10 sm:flex-row sm:items-end sm:justify-between">
+      <div>
+        <a href="#top" class="inline-flex items-center gap-2 text-lg font-bold text-white">
+          <Icon name="flower" class="size-6 text-rose" />
+          Uzazi
+        </a>
+        <p class="mt-3 max-w-sm text-sm leading-6 text-white/60">A gentle postpartum wellness companion rooted in care, culture, and community.</p>
+      </div>
+
+      <div class="flex flex-wrap gap-x-6 gap-y-3 text-sm text-white/70">
+        <a href="#experience" class="hover:text-white">Experience</a>
+        <a href="#stories" class="hover:text-white">Stories</a>
+        <a href={authUrl} class="hover:text-white">Start your journey</a>
+      </div>
+    </div>
+
+    <p class="mt-10 text-xs text-white/45">© {year} Uzazi. Nurturing mothers, strengthening villages.</p>
+  </div>
+</footer>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>("#newsletter-form");
+  const status = document.querySelector<HTMLElement>("#newsletter-status");
+  form?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    if (status) status.textContent = "Newsletter sign-up is opening soon. Thank you for your interest.";
+    form.reset();
+  });
+</script>
