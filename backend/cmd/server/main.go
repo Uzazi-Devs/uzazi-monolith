@@ -7,13 +7,13 @@ import (
 	"os"
 	"time"
 
-	"github.com/deluxesande/uzazi/backend/internal/ai"
-	"github.com/deluxesande/uzazi/backend/internal/auth"
-	"github.com/deluxesande/uzazi/backend/internal/community"
-	"github.com/deluxesande/uzazi/backend/internal/db"
-	"github.com/deluxesande/uzazi/backend/internal/health"
-	"github.com/deluxesande/uzazi/backend/internal/media"
-	"github.com/deluxesande/uzazi/backend/internal/shared"
+	"github.com/deluxesande/uzazi-monolith/backend/internal/ai"
+	"github.com/deluxesande/uzazi-monolith/backend/internal/auth"
+	"github.com/deluxesande/uzazi-monolith/backend/internal/community"
+	"github.com/deluxesande/uzazi-monolith/backend/internal/db"
+	"github.com/deluxesande/uzazi-monolith/backend/internal/health"
+	"github.com/deluxesande/uzazi-monolith/backend/internal/media"
+	"github.com/deluxesande/uzazi-monolith/backend/internal/shared"
 )
 
 func main() {
