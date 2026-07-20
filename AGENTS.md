@@ -24,7 +24,6 @@ Use Tailwind CSS (v4) for all frontend styling. Every frontend under
 `frontends/` has Tailwind set up:
 
 - `app-nextjs`: via `@tailwindcss/postcss` (`postcss.config.mjs`), imported in `app/globals.css`
-- `admin-svelte`: via `@tailwindcss/vite` (`vite.config.ts`), imported in `src/app.css`
 - `marketing-astro`: via `@tailwindcss/vite` (`astro.config.mjs`), imported in `src/styles/global.css`
 
 Prefer Tailwind utility classes over inline `style` attributes or ad hoc CSS.

@@ -13,11 +13,6 @@ app.localhost {
 	reverse_proxy app-nextjs:3001
 }
 
-# Admin / health-worker dashboard
-admin.localhost {
-	reverse_proxy admin-svelte:5173
-}
-
 # BetterAuth — the single auth origin
 auth.localhost {
 	reverse_proxy auth-service:3000
