@@ -1,0 +1,29 @@
+---
+import Baselayout from "../../layouts/Baselayout.astro";
+import ButtonLink from "../../components/ButtonLink.astro";
+import Icon from "../../components/Icon.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import "../../styles/global.css";
+---
+
+<Baselayout
+  title="You’re on the Uzazi waitlist"
+  description="Thank you for joining the Uzazi early access waitlist."
+>
+  <SiteHeader authUrl="/waitlist" />
+
+  <main id="main-content" class="garden-dots ambient-field grid min-h-[70vh] place-items-center px-4 py-16 text-center">
+    <section class="w-full max-w-xl rounded-2xl border border-petal bg-white p-8 sm:p-12">
+      <span class="mx-auto grid size-16 place-items-center rounded-full bg-rose text-bloom">
+        <Icon name="heart" class="size-7" />
+      </span>
+      <p class="mt-7 text-sm font-semibold uppercase tracking-[.14em] text-bloom">You’re on the list</p>
+      <h1 class="mt-4 text-balance text-4xl font-bold tracking-[-.02em] text-ink sm:text-5xl">Welcome to the village.</h1>
+      <p class="mx-auto mt-5 max-w-[42ch] text-pretty leading-7 text-copy">Thank you for sharing a little of your journey with us. We’ll be in touch as early access spaces become available.</p>
+      <ButtonLink href="/" class="mt-8">Return home</ButtonLink>
+    </section>
+  </main>
+
+  <SiteFooter authUrl="/waitlist" />
+</Baselayout>

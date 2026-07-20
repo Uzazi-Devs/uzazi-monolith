@@ -1,15 +1,17 @@
 {
   "name": "marketing-astro",
-  "private": true,
   "version": "0.1.0",
-  "type": "module",
+  "dependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^5.0.0",
+    "reicon": "^1.1.103",
+    "tailwindcss": "^4.3.3"
+  },
+  "private": true,
   "scripts": {
     "dev": "astro dev --port 4321 --host",
     "build": "astro build",
     "preview": "astro preview"
   },
-  "dependencies": {
-    "astro": "^5.0.0",
-    "better-auth": "^1.2.0"
-  }
+  "type": "module"
 }

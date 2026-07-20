@@ -1,0 +1,26 @@
+---
+import { Clock, Heart, Home, Leaf, Menu, ShieldCheck, Sparkles, Star, Users } from "reicon";
+
+interface Props {
+  name: "heart" | "sprout" | "people" | "clock" | "shield" | "flower" | "home" | "star" | "menu";
+  class?: string;
+  label?: string;
+  weight?: "Outline" | "Filled";
+}
+
+const { name, class: className = "size-6", label, weight = "Outline" } = Astro.props;
+const icons = {
+  heart: Heart,
+  sprout: Leaf,
+  people: Users,
+  clock: Clock,
+  shield: ShieldCheck,
+  flower: Sparkles,
+  home: Home,
+  star: Star,
+  menu: Menu,
+};
+const svg = icons[name].toSvg({ size: 24, color: "currentColor", weight });
+---
+
+<span class:list={["inline-flex shrink-0 [&>svg]:size-full", className]} aria-hidden={label ? undefined : "true"} role={label ? "img" : undefined} aria-label={label} set:html={svg}></span>
