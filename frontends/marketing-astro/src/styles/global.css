@@ -26,7 +26,7 @@
 }
 
 @layer utilities {
-  .page-shell { width: min(100% - 2.5rem, 1120px); margin-inline: auto; }
+  .page-shell { width: min(100% - 3rem, 1280px); margin-inline: auto; }
   .section-space { padding-block: clamp(5rem, 10vw, 8rem); }
   .garden-dots { background-image: radial-gradient(circle, rgb(173 47 91 / 0.055) 0.7px, transparent 0.8px); background-size: 24px 24px; }
   .hero-arch { border-radius: 4.5rem 4.5rem 10rem 4.5rem / 4.5rem 4.5rem 3rem 4.5rem; }
