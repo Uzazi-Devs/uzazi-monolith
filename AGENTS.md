@@ -46,6 +46,12 @@ HTTP handlers, service methods, and analysis/processing functions alike:
   e.g. Next.js route handlers split by method where the framework allows.
 - Keep helpers used by only one function in that function's file. Promote a
   helper to a shared file only when a second caller appears.
+- **Shared functions are the exception.** A function used by multiple
+  operations or modules must live in one shared location (the module's
+  `service.go`, a `helpers.go`, or `internal/shared/`) and be imported from
+  there. Never copy a shared function into each operation file — the
+  one-function-per-file rule applies to operations, not to their common
+  dependencies.
 
 ## Pull request and git push rules
 
