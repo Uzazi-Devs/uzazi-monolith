@@ -42,6 +42,8 @@ HTTP handlers, service methods, and analysis/processing functions alike:
   `backend/internal/community/post.go`.
 - Shared types, interfaces, and constructors for a module stay in a small
   `service.go` (or equivalent) in that module's directory.
+- Every Go package keeps its type declarations (structs, interfaces, context
+  keys) in a dedicated `types.go`; other files hold only functions and methods.
 - Same rule for TypeScript: one route handler or server function per file,
   e.g. Next.js route handlers split by method where the framework allows.
 - Keep helpers used by only one function in that function's file. Promote a
