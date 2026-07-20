@@ -3,7 +3,7 @@ package media
 import (
 	"context"
 
-	"github.com/deluxesande/uzazi-monolith/backend/internal/db"
+	"github.com/Uzazi-Devs/uzazi-monolith/backend/internal/db"
 )
 
 // Service records Cloud Storage object references. Actual byte uploads go
