@@ -54,6 +54,23 @@ HTTP handlers, service methods, and analysis/processing functions alike:
   one-function-per-file rule applies to operations, not to their common
   dependencies.
 
+## Project scope boundaries
+
+- Treat the project, app, service, package, or directory named by the user as
+  the complete edit scope. Do not modify sibling projects or shared repository
+  infrastructure unless the user explicitly expands the scope.
+- Discovering that the requested project depends on an unimplemented feature
+  elsewhere does **not** authorize cross-project implementation. Stop at the
+  current project's integration boundary, explain the missing dependency, and
+  keep the scoped implementation honest about that limitation.
+- When an out-of-scope feature is missing, offer an issue or pull request as a
+  possible next step instead of implementing it automatically. The user alone
+  decides whether an issue or PR should be created.
+- Never create an issue, pull request, push, or other remote artifact merely
+  because it would complete the wider feature. Require an explicit user request
+  for that specific action. End-to-end ownership is not permission to expand
+  project scope or perform remote actions.
+
 ## Pull request and git push rules
 
 These rules apply to all work in this repository.
@@ -86,4 +103,5 @@ git push -u origin HEAD
 # open a PR into main and complete the repository PR template
 ```
 
-Keep each PR focused. If unrelated work is discovered, put it in a separate branch and PR.
+Keep each PR focused. If unrelated work is discovered, leave it out and offer a
+separate issue or PR only if the user wants one.
