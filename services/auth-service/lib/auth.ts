@@ -18,11 +18,11 @@ export const auth = betterAuth({
 
   emailAndPassword: { enabled: true },
 
-  socialProviders: process.env.GITHUB_CLIENT_ID
+  socialProviders: process.env.GOOGLE_CLIENT_ID
     ? {
-        github: {
-          clientId: process.env.GITHUB_CLIENT_ID,
-          clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
+        google: {
+          clientId: process.env.GOOGLE_CLIENT_ID,
+          clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
         },
       }
     : undefined,

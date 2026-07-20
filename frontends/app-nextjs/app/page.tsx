@@ -27,8 +27,8 @@ export default function Page() {
       {session ? (
         <button onClick={() => authClient.signOut()}>Sign out</button>
       ) : (
-        <button onClick={() => authClient.signIn.social({ provider: "github" })}>
-          Sign in with GitHub
+        <button onClick={() => authClient.signIn.social({ provider: "google" })}>
+          Sign in with Google
         </button>
       )}
     </main>
