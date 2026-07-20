@@ -1,0 +1,30 @@
+---
+import Icon from "./Icon.astro";
+
+type IconName = "sprout" | "people" | "clock" | "shield";
+interface Props {
+  title: string;
+  description: string;
+  icon: IconName;
+  tone?: "neutral" | "pink" | "plum" | "rose";
+  class?: string;
+}
+const { title, description, icon, tone = "neutral", class: className = "" } = Astro.props;
+const tones = {
+  neutral: "bg-soft text-ink",
+  pink: "bg-petal-strong text-plum",
+  plum: "bg-plum-soft text-white",
+  rose: "bg-rose text-plum",
+};
+---
+
+<article class:list={["group relative flex min-h-72 overflow-hidden rounded-2xl p-8 sm:p-10", tones[tone], className]}>
+  <div class="relative z-10 mt-auto max-w-xl space-y-5">
+    <div class:list={["grid size-12 place-items-center rounded-xl", tone === "plum" ? "bg-white/10" : "bg-bloom/10"]}>
+      <Icon name={icon} class="size-7" />
+    </div>
+    <h3 class="text-2xl font-medium tracking-[-0.02em]">{title}</h3>
+    <p class:list={["max-w-[44ch] leading-7", tone === "plum" ? "text-white/80" : "text-copy"]}>{description}</p>
+  </div>
+  <slot />
+</article>
