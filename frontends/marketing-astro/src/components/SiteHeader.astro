@@ -6,15 +6,15 @@ interface Props { authUrl: string; }
 const { authUrl } = Astro.props;
 
 const links = [
-  { href: "#experience", label: "Experience" },
-  { href: "#stories", label: "Stories" },
-  { href: "#join", label: "Join the village" },
+  { href: "/#experience", label: "Experience" },
+  { href: "/#stories", label: "Stories" },
+  { href: "/#join", label: "Join the village" },
 ];
 ---
 
 <header class="sticky inset-x-0 top-0 z-40 border-b border-petal/40 bg-canvas/95 backdrop-blur-md">
   <div class="page-shell flex min-h-16 items-center justify-between gap-6">
-    <a href="#top" class="site-logo flex min-h-11 items-center gap-2 font-bold text-bloom focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-bloom" aria-label="Uzazi home">
+    <a href="/#top" class="site-logo flex min-h-11 items-center gap-2 font-bold text-bloom focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-bloom" aria-label="Uzazi home">
       <Icon name="flower" class="size-6" />
       <span>Uzazi</span>
     </a>

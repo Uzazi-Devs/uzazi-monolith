@@ -1,6 +1,8 @@
 ---
 import Baselayout from "../layouts/Baselayout.astro";
 import Icon from "../components/Icon.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteHeader from "../components/SiteHeader.astro";
 import "../styles/global.css";
 
 const formEndpoint = import.meta.env.PUBLIC_WAITLIST_FORM_ENDPOINT || "/waitlist/thanks";
@@ -11,25 +13,16 @@ const fieldClass = "min-h-12 w-full rounded-xl border border-petal bg-white px-4
   title="Join the Uzazi waitlist"
   description="Join the Uzazi waitlist for thoughtful postpartum support rooted in African care, culture, and community."
 >
-  <main id="top" class="garden-dots min-h-screen overflow-hidden">
-    <header class="page-shell flex min-h-20 items-center justify-between gap-4">
-      <a href="/" class="site-logo inline-flex min-h-11 items-center gap-2 font-bold text-bloom focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-bloom" aria-label="Uzazi home">
-        <Icon name="flower" class="size-6" />
-        <span>Uzazi</span>
-      </a>
-      <a href="/" class="inline-flex min-h-11 items-center rounded-full px-4 text-sm font-medium text-copy transition hover:bg-white hover:text-bloom focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-bloom">
-        Back home
-      </a>
-    </header>
+  <SiteHeader authUrl="/waitlist" />
 
+  <main id="top" class="garden-dots min-h-screen overflow-hidden">
     <section class="ambient-field relative pb-16 pt-6 sm:pb-24 sm:pt-10 lg:pb-28">
       <div class="pointer-events-none absolute -left-36 top-24 size-96 rounded-full bg-rose/40 blur-3xl"></div>
       <Icon name="sprout" class="section-motif pointer-events-none absolute -right-20 top-10 size-72 rotate-[-18deg] text-bloom/[.04]" />
 
       <div class="page-shell relative grid items-start gap-12 lg:grid-cols-[.82fr_1.18fr] lg:gap-20">
         <div class="pt-4 lg:sticky lg:top-28 lg:pt-10">
-          <p class="text-sm font-semibold uppercase tracking-[.14em] text-bloom">Early access</p>
-          <h1 class="mt-5 max-w-[12ch] text-balance text-[clamp(2.75rem,5vw,4.5rem)] font-extrabold leading-[1.02] tracking-[-.05em] text-ink">
+          <h1 class="max-w-[12ch] text-balance text-[clamp(2.75rem,5vw,4.5rem)] font-extrabold leading-[1.02] tracking-[-.05em] text-ink">
             Grow with the village from day one.
           </h1>
           <p class="mt-7 max-w-[44ch] text-pretty text-base leading-7 text-copy sm:text-lg sm:leading-8">
@@ -121,6 +114,8 @@ const fieldClass = "min-h-12 w-full rounded-xl border border-petal bg-white px-4
       </div>
     </section>
   </main>
+
+  <SiteFooter authUrl="/waitlist" />
 
   <script>
     const email = new URLSearchParams(window.location.search).get("email");
