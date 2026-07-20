@@ -1,0 +1,131 @@
+---
+import Baselayout from "../layouts/Baselayout.astro";
+import Icon from "../components/Icon.astro";
+import "../styles/global.css";
+
+const formEndpoint = import.meta.env.PUBLIC_WAITLIST_FORM_ENDPOINT || "/waitlist/thanks";
+const fieldClass = "min-h-12 w-full rounded-xl border border-petal bg-white px-4 py-3 text-sm text-ink outline-none transition placeholder:text-muted focus:border-bloom focus:ring-2 focus:ring-bloom/15";
+---
+
+<Baselayout
+  title="Join the Uzazi waitlist"
+  description="Join the Uzazi waitlist for thoughtful postpartum support rooted in African care, culture, and community."
+>
+  <main id="top" class="garden-dots min-h-screen overflow-hidden">
+    <header class="page-shell flex min-h-20 items-center justify-between gap-4">
+      <a href="/" class="site-logo inline-flex min-h-11 items-center gap-2 font-bold text-bloom focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-bloom" aria-label="Uzazi home">
+        <Icon name="flower" class="size-6" />
+        <span>Uzazi</span>
+      </a>
+      <a href="/" class="inline-flex min-h-11 items-center rounded-full px-4 text-sm font-medium text-copy transition hover:bg-white hover:text-bloom focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-bloom">
+        Back home
+      </a>
+    </header>
+
+    <section class="ambient-field relative pb-16 pt-6 sm:pb-24 sm:pt-10 lg:pb-28">
+      <div class="pointer-events-none absolute -left-36 top-24 size-96 rounded-full bg-rose/40 blur-3xl"></div>
+      <Icon name="sprout" class="section-motif pointer-events-none absolute -right-20 top-10 size-72 rotate-[-18deg] text-bloom/[.04]" />
+
+      <div class="page-shell relative grid items-start gap-12 lg:grid-cols-[.82fr_1.18fr] lg:gap-20">
+        <div class="pt-4 lg:sticky lg:top-28 lg:pt-10">
+          <p class="text-sm font-semibold uppercase tracking-[.14em] text-bloom">Early access</p>
+          <h1 class="mt-5 max-w-[12ch] text-balance text-[clamp(2.75rem,5vw,4.5rem)] font-extrabold leading-[1.02] tracking-[-.05em] text-ink">
+            Grow with the village from day one.
+          </h1>
+          <p class="mt-7 max-w-[44ch] text-pretty text-base leading-7 text-copy sm:text-lg sm:leading-8">
+            Tell us a little about your journey. Your answers will help us shape gentle, culturally rooted support for the moments that matter most.
+          </p>
+
+          <ul class="mt-9 grid gap-4 text-sm leading-6 text-copy" aria-label="Waitlist benefits">
+            <li class="flex items-start gap-3">
+              <span class="mt-0.5 grid size-8 shrink-0 place-items-center rounded-full bg-rose text-bloom"><Icon name="heart" class="size-4" /></span>
+              <span><strong class="block font-semibold text-ink">Be among the first</strong>Receive early access invitations as spaces open.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-0.5 grid size-8 shrink-0 place-items-center rounded-full bg-rose text-bloom"><Icon name="people" class="size-4" /></span>
+              <span><strong class="block font-semibold text-ink">Help shape Uzazi</strong>Share what meaningful postpartum support looks like to you.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="mt-0.5 grid size-8 shrink-0 place-items-center rounded-full bg-rose text-bloom"><Icon name="shield" class="size-4" /></span>
+              <span><strong class="block font-semibold text-ink">Your story stays respected</strong>We only ask for what helps us serve you better.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="rounded-[2rem] bg-white p-6 shadow-[0_18px_50px_rgba(114,36,62,.1)] ring-1 ring-petal/80 sm:p-9 lg:p-11">
+          <div class="mb-8">
+            <h2 class="text-2xl font-semibold tracking-[-.025em] text-plum sm:text-3xl">Join the waitlist</h2>
+            <p class="mt-2 text-sm leading-6 text-copy">Fields marked with <span aria-hidden="true">*</span><span class="sr-only">an asterisk</span> are required.</p>
+          </div>
+
+          <form
+            id="waitlist-form"
+            name="waitlist"
+            method="POST"
+            action={formEndpoint}
+            data-netlify="true"
+            netlify-honeypot="company"
+            class="grid gap-6"
+          >
+            <input type="hidden" name="form-name" value="waitlist" />
+            <p class="hidden" aria-hidden="true">
+              <label>Do not fill this out: <input name="company" tabindex="-1" autocomplete="off" /></label>
+            </p>
+
+            <div class="grid gap-6 sm:grid-cols-2">
+              <div>
+                <label for="name" class="mb-2 block text-sm font-medium text-ink">Your name <span class="text-bloom" aria-hidden="true">*</span></label>
+                <input id="name" name="name" type="text" autocomplete="name" required maxlength="100" placeholder="How should we address you?" class={fieldClass} />
+              </div>
+              <div>
+                <label for="email" class="mb-2 block text-sm font-medium text-ink">Email address <span class="text-bloom" aria-hidden="true">*</span></label>
+                <input id="email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="254" placeholder="you@example.com" class={fieldClass} />
+              </div>
+            </div>
+
+            <div>
+              <label for="stage" class="mb-2 block text-sm font-medium text-ink">Where are you in your journey? <span class="text-bloom" aria-hidden="true">*</span></label>
+              <select id="stage" name="stage" required class={fieldClass}>
+                <option value="" selected disabled>Select the closest fit</option>
+                <option value="expecting">I’m expecting</option>
+                <option value="0-3-months">0–3 months postpartum</option>
+                <option value="4-12-months">4–12 months postpartum</option>
+                <option value="1-plus-years">More than a year postpartum</option>
+                <option value="supporting-mothers">I support mothers professionally or personally</option>
+                <option value="other">Something else</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="location" class="mb-2 block text-sm font-medium text-ink">Where are you based? <span class="font-normal text-muted">Optional</span></label>
+              <input id="location" name="location" type="text" autocomplete="country-name" maxlength="100" placeholder="Country or city" class={fieldClass} />
+            </div>
+
+            <div>
+              <label for="support" class="mb-2 block text-sm font-medium text-ink">What kind of support would feel most valuable? <span class="font-normal text-muted">Optional</span></label>
+              <textarea id="support" name="support" rows="4" maxlength="1000" placeholder="Share as much or as little as feels comfortable." class={`${fieldClass} resize-y`}></textarea>
+              <p class="mt-2 text-xs leading-5 text-muted">Please do not include private medical information.</p>
+            </div>
+
+            <label class="flex cursor-pointer items-start gap-3 rounded-xl bg-soft/70 p-4 text-sm leading-6 text-copy">
+              <input name="consent" type="checkbox" value="yes" required class="mt-1 size-4 shrink-0 accent-bloom" />
+              <span>I agree that Uzazi may contact me about early access and occasional product updates. I can unsubscribe at any time. <span class="text-bloom" aria-hidden="true">*</span></span>
+            </label>
+
+            <button type="submit" class="pressable inline-flex min-h-12 w-full items-center justify-center rounded-full bg-bloom px-8 py-3.5 text-sm font-semibold text-white shadow-[0_6px_12px_rgba(165,46,90,.16)] transition duration-300 hover:-translate-y-0.5 hover:bg-plum focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-bloom active:translate-y-0 active:scale-[.98]">
+              Join the Uzazi waitlist
+            </button>
+            <p class="text-center text-xs leading-5 text-muted">No spam. Just thoughtful updates as Uzazi grows.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const email = new URLSearchParams(window.location.search).get("email");
+    const emailField = document.querySelector<HTMLInputElement>("#email");
+    if (email && emailField) emailField.value = email;
+
+  </script>
+</Baselayout>
