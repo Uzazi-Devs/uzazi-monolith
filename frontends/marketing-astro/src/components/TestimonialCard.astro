@@ -3,14 +3,14 @@ interface Props { quote: string; name: string; detail: string; }
 const { quote, name, detail } = Astro.props;
 ---
 
-<figure class="testimonial-card relative flex h-full flex-col rounded-2xl bg-white p-8 ring-1 ring-petal/60">
+<figure class="testimonial-card relative flex h-full flex-col border-t border-plum/20 pt-8">
   <span class="quote-mark absolute right-6 top-4 text-6xl font-bold leading-none text-rose" aria-hidden="true">”</span>
   <blockquote class="relative z-10 text-pretty italic leading-7 text-copy">“{quote}”</blockquote>
   <figcaption class="mt-auto flex items-center gap-3 pt-8">
     <span class="avatar-dot size-10 rounded-full bg-petal" aria-hidden="true"></span>
     <span>
       <strong class="block text-sm text-ink">{name}</strong>
-      <span class="text-xs text-muted">{detail}</span>
+      <span class="text-sm text-muted">{detail}</span>
     </span>
   </figcaption>
 </figure>

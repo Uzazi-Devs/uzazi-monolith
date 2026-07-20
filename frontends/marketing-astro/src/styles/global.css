@@ -1,13 +1,14 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Avenir Next", Avenir, "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+  --font-display: Charter, "Bitstream Charter", "Sitka Text", Cambria, serif;
   --color-canvas: #fbf9f4;
   --color-soft: #f4f1ed;
   --color-white: #ffffff;
   --color-ink: #1b1c19;
   --color-copy: #5d484d;
-  --color-muted: #8b7277;
+  --color-muted: #745860;
   --color-bloom: #ad2f5b;
   --color-plum: #72243e;
   --color-plum-soft: #b75576;
@@ -21,6 +22,7 @@
   * { box-sizing: border-box; }
   html { background: var(--color-canvas); }
   body { margin: 0; min-width: 320px; overflow-x: hidden; font-family: var(--font-sans); }
+  h1, h2 { font-family: var(--font-display); }
   button, input { font: inherit; }
   ::selection { background: var(--color-rose); color: var(--color-plum); }
 }
@@ -32,11 +34,6 @@
   .hero-arch { border-radius: 4.5rem 4.5rem 10rem 4.5rem / 4.5rem 4.5rem 3rem 4.5rem; }
   .text-balance { text-wrap: balance; }
   .text-pretty { text-wrap: pretty; }
-}
-
-@keyframes gentle-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
 }
 
 @keyframes hero-copy-in {
@@ -54,11 +51,6 @@
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-@keyframes motif-drift {
-  from { transform: translate3d(0, 0, 0) rotate(-2deg); }
-  to { transform: translate3d(0, -10px, 0) rotate(3deg); }
-}
-
 .ambient-field {
   background-image:
     radial-gradient(circle at 8% 18%, rgb(255 217 226 / .32), transparent 24%),
@@ -66,20 +58,15 @@
     radial-gradient(ellipse at 58% 92%, rgb(173 47 91 / .045), transparent 32%);
 }
 
-.hero-copy > * { animation: hero-copy-in .68s var(--ease-out-soft) both; }
+.hero-copy > * { animation: hero-copy-in .62s var(--ease-out-soft) both; }
 .hero-copy > :nth-child(2) { animation-delay: 70ms; }
 .hero-copy > :nth-child(3) { animation-delay: 140ms; }
-.hero-visual { animation: hero-visual-in .88s var(--ease-out-soft) 90ms both; }
-
-.mascot-float { animation: gentle-float 7s var(--ease-out-soft) infinite; }
-.section-motif { animation: motif-drift 10s ease-in-out infinite alternate; }
-.section-motif-reverse { animation-direction: alternate-reverse; animation-duration: 12s; }
+.hero-visual { animation: hero-visual-in .76s var(--ease-out-soft) 90ms both; }
 .site-logo svg,
 .icon-tile,
 .quote-mark,
 .avatar-dot,
-.feature-image,
-.stat-item strong {
+.feature-image {
   transition: transform 220ms var(--ease-out-soft), opacity 220ms ease, color 220ms ease, background-color 220ms ease;
 }
 
@@ -103,19 +90,11 @@ details[open] .menu-surface {
 }
 
 .feature-card,
-.testimonial-card,
 .mascot-card {
   transition: transform 240ms var(--ease-out-soft), box-shadow 240ms ease;
 }
 
-.reveal {
-  opacity: 1;
-  translate: 0 0;
-  transition: opacity .68s var(--ease-out-soft), translate .68s var(--ease-out-soft);
-  transition-delay: var(--reveal-delay, 0ms);
-}
-
-.js .reveal:not(.is-visible) { opacity: 0; translate: 0 22px; }
+.testimonial-card { transition: transform 220ms var(--ease-out-soft); }
 
 @media (hover: hover) and (pointer: fine) {
   .site-logo:hover svg { transform: rotate(10deg) scale(1.08); }
@@ -123,10 +102,9 @@ details[open] .menu-surface {
   .feature-card:hover { transform: translateY(-6px); box-shadow: 0 7px 8px rgb(114 36 62 / .08); }
   .feature-card:hover .icon-tile { transform: translateY(-2px) rotate(-3deg) scale(1.06); }
   .feature-card:hover .feature-image { transform: scale(1.035); }
-  .testimonial-card:hover { transform: translateY(-5px); box-shadow: 0 7px 8px rgb(114 36 62 / .07); }
+  .testimonial-card:hover { transform: translateY(-3px); }
   .testimonial-card:hover .quote-mark { transform: translateY(-3px) rotate(4deg); }
   .testimonial-card:hover .avatar-dot { transform: scale(1.08); background: var(--color-rose); }
-  .stat-item:hover strong { transform: translateY(-2px) scale(1.045); }
   .mascot-card:hover { transform: translateY(-4px); }
 }
 
@@ -138,6 +116,5 @@ details[open] .menu-surface {
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
-  .js .reveal:not(.is-visible) { opacity: 1; translate: none; }
   .hero-copy > *, .hero-visual { opacity: 1; filter: none; transform: none; }
 }

@@ -16,12 +16,10 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="theme-color" content="#fbf9f4" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <title>{title}</title>
   </head>
-  <body class="bg-canvas text-ink antialiased">
+  <body id="top" class="bg-canvas text-ink antialiased">
+    <a href="#main-content" class="fixed left-4 top-4 z-50 -translate-y-24 rounded-lg bg-ink px-4 py-3 text-sm font-semibold text-white transition-transform duration-200 focus:translate-y-0">Skip to main content</a>
     <slot />
   </body>
 </html>

@@ -16,17 +16,17 @@ const year = new Date().getFullYear();
 
       <div>
         <form action="/waitlist" method="get" class="flex flex-col gap-3 sm:flex-row">
-          <label class="sr-only" for="email">Your email address</label>
-          <input id="email" name="email" type="email" autocomplete="email" required placeholder="Your email address" class="min-h-12 flex-1 rounded-xl bg-white px-5 text-sm text-ink outline-none ring-1 ring-transparent transition placeholder:text-copy focus:ring-2 focus:ring-rose" />
+          <label class="sr-only" for="footer-email">Your email address</label>
+          <input id="footer-email" name="email" type="email" autocomplete="email" required placeholder="Your email address" class="min-h-12 flex-1 rounded-xl bg-white px-5 text-sm text-ink outline-none ring-1 ring-transparent transition placeholder:text-copy focus:ring-2 focus:ring-rose" />
           <button type="submit" class="pressable min-h-12 rounded-xl bg-rose px-7 py-3 text-sm font-semibold text-plum transition duration-300 hover:-translate-y-0.5 hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rose active:translate-y-0 active:scale-[.97]">Join the Waitlist</button>
         </form>
-        <p class="mt-4 min-h-5 text-xs text-white/60">We honor your privacy like a sacred space. No spam, ever.</p>
+        <p class="mt-4 min-h-5 text-sm text-white/60">We honor your privacy like a sacred space. No spam, ever.</p>
       </div>
     </div>
 
     <div class="flex flex-col gap-8 pt-10 sm:flex-row sm:items-end sm:justify-between">
       <div>
-        <a href="/#top" class="inline-flex items-center gap-2 text-lg font-bold text-white">
+        <a href="/#top" class="inline-flex min-h-11 items-center gap-2 text-lg font-bold text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rose">
           <Icon name="flower" class="size-6 text-rose" />
           Uzazi
         </a>
@@ -34,12 +34,12 @@ const year = new Date().getFullYear();
       </div>
 
       <div class="flex flex-wrap gap-x-6 gap-y-3 text-sm text-white/70">
-        <a href="/#experience" class="hover:text-white">Experience</a>
-        <a href="/#stories" class="hover:text-white">Stories</a>
-        <a href={authUrl} class="hover:text-white">Start your journey</a>
+        <a href="/#experience" class="inline-flex min-h-11 items-center hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rose">Experience</a>
+        <a href="/#stories" class="inline-flex min-h-11 items-center hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rose">Stories</a>
+        <a href={authUrl} class="inline-flex min-h-11 items-center hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-rose">Start your journey</a>
       </div>
     </div>
 
-    <p class="mt-10 text-xs text-white/45">© {year} Uzazi. Nurturing mothers, strengthening villages.</p>
+    <p class="mt-10 text-sm text-white/60">© {year} Uzazi. Nurturing mothers, strengthening villages.</p>
   </div>
 </footer>

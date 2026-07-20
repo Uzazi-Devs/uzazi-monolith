@@ -15,14 +15,14 @@ const fieldClass = "min-h-12 w-full rounded-xl border border-petal bg-white px-4
 >
   <SiteHeader authUrl="/waitlist" />
 
-  <main id="top" class="garden-dots min-h-screen overflow-hidden">
+  <main id="main-content" class="garden-dots min-h-screen overflow-hidden">
     <section class="ambient-field relative pb-16 pt-6 sm:pb-24 sm:pt-10 lg:pb-28">
       <div class="pointer-events-none absolute -left-36 top-24 size-96 rounded-full bg-rose/40 blur-3xl"></div>
-      <Icon name="sprout" class="section-motif pointer-events-none absolute -right-20 top-10 size-72 rotate-[-18deg] text-bloom/[.04]" />
+      <Icon name="sprout" class="pointer-events-none absolute -right-20 top-10 size-72 rotate-[-18deg] text-bloom/[.04]" />
 
       <div class="page-shell relative grid items-start gap-12 lg:grid-cols-[.82fr_1.18fr] lg:gap-20">
         <div class="pt-4 lg:sticky lg:top-28 lg:pt-10">
-          <h1 class="max-w-[12ch] text-balance text-[clamp(2.75rem,5vw,4.5rem)] font-extrabold leading-[1.02] tracking-[-.05em] text-ink">
+          <h1 class="max-w-[12ch] text-balance text-[clamp(2.75rem,5vw,4.5rem)] font-bold leading-[1.02] tracking-[-.025em] text-ink">
             Grow with the village from day one.
           </h1>
           <p class="mt-7 max-w-[44ch] text-pretty text-base leading-7 text-copy sm:text-lg sm:leading-8">
@@ -45,7 +45,7 @@ const fieldClass = "min-h-12 w-full rounded-xl border border-petal bg-white px-4
           </ul>
         </div>
 
-        <div class="rounded-[2rem] bg-white p-6 shadow-[0_18px_50px_rgba(114,36,62,.1)] ring-1 ring-petal/80 sm:p-9 lg:p-11">
+        <div class="rounded-2xl border border-petal bg-white p-6 sm:p-9 lg:p-11">
           <div class="mb-8">
             <h2 class="text-2xl font-semibold tracking-[-.025em] text-plum sm:text-3xl">Join the waitlist</h2>
             <p class="mt-2 text-sm leading-6 text-copy">Fields marked with <span aria-hidden="true">*</span><span class="sr-only">an asterisk</span> are required.</p>
@@ -71,8 +71,8 @@ const fieldClass = "min-h-12 w-full rounded-xl border border-petal bg-white px-4
                 <input id="name" name="name" type="text" autocomplete="name" required maxlength="100" placeholder="How should we address you?" class={fieldClass} />
               </div>
               <div>
-                <label for="email" class="mb-2 block text-sm font-medium text-ink">Email address <span class="text-bloom" aria-hidden="true">*</span></label>
-                <input id="email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="254" placeholder="you@example.com" class={fieldClass} />
+                <label for="waitlist-email" class="mb-2 block text-sm font-medium text-ink">Email address <span class="text-bloom" aria-hidden="true">*</span></label>
+                <input id="waitlist-email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="254" placeholder="you@example.com" class={fieldClass} />
               </div>
             </div>
 
@@ -97,7 +97,7 @@ const fieldClass = "min-h-12 w-full rounded-xl border border-petal bg-white px-4
             <div>
               <label for="support" class="mb-2 block text-sm font-medium text-ink">What kind of support would feel most valuable? <span class="font-normal text-muted">Optional</span></label>
               <textarea id="support" name="support" rows="4" maxlength="1000" placeholder="Share as much or as little as feels comfortable." class={`${fieldClass} resize-y`}></textarea>
-              <p class="mt-2 text-xs leading-5 text-muted">Please do not include private medical information.</p>
+              <p class="mt-2 text-sm leading-5 text-muted">Please do not include private medical information.</p>
             </div>
 
             <label class="flex cursor-pointer items-start gap-3 rounded-xl bg-soft/70 p-4 text-sm leading-6 text-copy">
@@ -108,7 +108,7 @@ const fieldClass = "min-h-12 w-full rounded-xl border border-petal bg-white px-4
             <button type="submit" class="pressable inline-flex min-h-12 w-full items-center justify-center rounded-full bg-bloom px-8 py-3.5 text-sm font-semibold text-white shadow-[0_6px_12px_rgba(165,46,90,.16)] transition duration-300 hover:-translate-y-0.5 hover:bg-plum focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-bloom active:translate-y-0 active:scale-[.98]">
               Join the Uzazi waitlist
             </button>
-            <p class="text-center text-xs leading-5 text-muted">No spam. Just thoughtful updates as Uzazi grows.</p>
+            <p class="text-center text-sm leading-5 text-muted">No spam. Just thoughtful updates as Uzazi grows.</p>
           </form>
         </div>
       </div>
@@ -119,7 +119,7 @@ const fieldClass = "min-h-12 w-full rounded-xl border border-petal bg-white px-4
 
   <script>
     const email = new URLSearchParams(window.location.search).get("email");
-    const emailField = document.querySelector<HTMLInputElement>("#email");
+    const emailField = document.querySelector<HTMLInputElement>("#waitlist-email");
     if (email && emailField) emailField.value = email;
 
   </script>

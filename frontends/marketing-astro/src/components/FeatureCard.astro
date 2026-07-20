@@ -25,7 +25,7 @@ const tones = {
       <Icon name={icon} class="size-7" />
     </div>
     <h3 class="text-2xl font-medium tracking-[-0.02em]">{title}</h3>
-    <p class:list={["max-w-[44ch] leading-7", tone === "plum" ? "text-white/80" : "text-copy"]}>{description}</p>
+    <p class:list={["max-w-[44ch] leading-7", tone === "plum" ? "text-white" : tone === "pink" ? "text-ink" : "text-copy"]}>{description}</p>
   </div>
   <slot />
 </article>
