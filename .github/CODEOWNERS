@@ -4,8 +4,8 @@
 # backend and the auth-service, so it always needs @deluxesande.
 /db/migrations/                 @deluxesande
 
-/backend/                       @deluxesande
-/services/auth-service/         @deluxesande
+/backend/                       @deluxesande @Sewyn-Codes
+/services/auth-service/         @deluxesande @Sewyn-Codes
 /frontends/marketing-astro/     @deluxesande
-/frontends/app-nextjs/          @deluxesande
+/frontends/app-nextjs/          @Ronald-Wesh @isaac205
 /.github/                       @deluxesande
