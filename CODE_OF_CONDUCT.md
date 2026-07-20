@@ -59,8 +59,11 @@ representative at an online or offline event.
 ## Enforcement
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
-reported to the community leaders responsible for enforcement by opening an
-issue or contacting the repository maintainer, [@deluxesande](https://github.com/deluxesande).
+reported privately to the repository maintainer,
+[@deluxesande](https://github.com/deluxesande), via a GitHub direct message or
+the contact options listed on that profile. Do not report sensitive incidents
+in public issues, and do not disclose sensitive details or the identities of
+those involved in any public forum.
 All complaints will be reviewed and investigated promptly and fairly.
 
 All community leaders are obligated to respect the privacy and security of the

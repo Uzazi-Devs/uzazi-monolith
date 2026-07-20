@@ -55,6 +55,9 @@ git switch -c chore/<name>   # or feature/<name>, fix/<name>
 # make and validate focused changes
 git add <changed-files>
 git commit -m "Concise description"
+
+# STOP HERE unless the user has explicitly authorized the remote actions below.
+# Pushing and opening a PR are remote operations covered by rule 11.
 git push -u origin HEAD
 # open a PR into main and complete the repository PR template
 ```
