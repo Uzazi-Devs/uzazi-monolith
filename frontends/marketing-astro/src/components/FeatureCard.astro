@@ -8,8 +8,9 @@ interface Props {
   icon: IconName;
   tone?: "neutral" | "pink" | "plum" | "rose";
   class?: string;
+  delay?: number;
 }
-const { title, description, icon, tone = "neutral", class: className = "" } = Astro.props;
+const { title, description, icon, tone = "neutral", class: className = "", delay = 0 } = Astro.props;
 const tones = {
   neutral: "bg-soft text-ink",
   pink: "bg-petal-strong text-plum",
@@ -18,9 +19,9 @@ const tones = {
 };
 ---
 
-<article class:list={["group relative flex min-h-72 overflow-hidden rounded-2xl p-8 sm:p-10", tones[tone], className]}>
+<article class:list={["feature-card group relative flex min-h-72 overflow-hidden rounded-2xl p-8 sm:p-10", tones[tone], className]} style={`--reveal-delay:${delay}ms`}>
   <div class="relative z-10 mt-auto max-w-xl space-y-5">
-    <div class:list={["grid size-12 place-items-center rounded-xl", tone === "plum" ? "bg-white/10" : "bg-bloom/10"]}>
+    <div class:list={["icon-tile grid size-12 place-items-center rounded-xl", tone === "plum" ? "bg-white/10" : "bg-bloom/10"]}>
       <Icon name={icon} class="size-7" />
     </div>
     <h3 class="text-2xl font-medium tracking-[-0.02em]">{title}</h3>

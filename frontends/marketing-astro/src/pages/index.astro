@@ -45,10 +45,10 @@ const testimonials = [
   <SiteHeader authUrl={AUTH} />
 
   <main id="top" class="garden-dots overflow-hidden">
-    <section class="relative py-14 sm:py-20 lg:py-24">
+    <section class="ambient-field relative py-14 sm:py-20 lg:py-24">
       <div class="pointer-events-none absolute -right-28 top-2 size-96 rounded-full bg-rose/35 blur-3xl"></div>
       <div class="page-shell grid items-center gap-16 lg:grid-cols-2 lg:gap-14">
-        <div class="relative z-10 space-y-7 lg:py-8">
+        <div class="hero-copy relative z-10 space-y-7 lg:py-8">
           <h1 class="max-w-[19ch] text-balance text-[clamp(2.75rem,4.5vw,3.5rem)] font-extrabold leading-[1.08] tracking-[-0.04em] text-ink">
             Nurturing the village that nurtures the child.
           </h1>
@@ -61,7 +61,7 @@ const testimonials = [
           </div>
         </div>
 
-        <div class="relative mx-auto w-full max-w-2xl pb-16 lg:pb-10">
+        <div class="hero-visual relative mx-auto w-full max-w-2xl pb-16 lg:pb-10">
           <div class="hero-arch relative aspect-[4/4.15] overflow-hidden bg-soft shadow-[0_18px_45px_rgba(114,36,62,.12)]">
             <Image
               src={motherAndBaby}
@@ -72,7 +72,7 @@ const testimonials = [
               loading="eager"
             />
           </div>
-          <aside class="mascot-float absolute bottom-0 left-1/2 flex w-[min(90%,18rem)] -translate-x-1/2 items-start gap-4 rounded-2xl bg-white p-5 shadow-[0_10px_24px_rgba(90,45,60,.13)] ring-1 ring-petal lg:-left-8 lg:translate-x-0" aria-label="Encouragement from Mama Bear">
+          <aside class="mascot-card mascot-float absolute bottom-0 left-1/2 flex w-[min(90%,18rem)] -translate-x-1/2 items-start gap-4 rounded-2xl bg-white p-5 shadow-[0_10px_24px_rgba(90,45,60,.13)] ring-1 ring-petal lg:-left-8 lg:translate-x-0" aria-label="Encouragement from Mama Bear">
             <span class="grid size-12 shrink-0 place-items-center rounded-full bg-rose text-bloom">
               <Icon name="heart" class="size-5" />
             </span>
@@ -91,7 +91,7 @@ const testimonials = [
       </svg>
       <div class="page-shell relative grid gap-10 text-center sm:grid-cols-3 sm:gap-0">
         {stats.map((stat, index) => (
-          <div class:list={["reveal px-6", index > 0 && "sm:border-l sm:border-petal"]}>
+          <div class:list={["stat-item reveal px-6", index > 0 && "sm:border-l sm:border-petal"]} style={`--reveal-delay:${index * 70}ms`}>
             <strong class="block text-5xl font-bold tracking-[-0.04em] text-bloom">{stat.value}</strong>
             <span class="mt-4 block text-sm font-medium uppercase tracking-[0.08em] text-copy">{stat.label}</span>
             <span class="mt-1 block text-xs text-muted">{stat.note}</span>
@@ -100,8 +100,10 @@ const testimonials = [
       </div>
     </section>
 
-    <section id="experience" class="section-space bg-white">
-      <div class="page-shell">
+    <section id="experience" class="section-space relative overflow-hidden bg-white">
+      <Icon name="sprout" class="section-motif pointer-events-none absolute -right-20 top-20 size-72 rotate-[-18deg] text-bloom/[.035]" />
+      <Icon name="flower" class="section-motif section-motif-reverse pointer-events-none absolute -left-16 bottom-14 size-52 text-bloom/[.03]" />
+      <div class="page-shell relative z-10">
         <SectionIntro title="Built for your daily rhythm" />
 
         <div class="mt-16 grid gap-8 md:grid-cols-12">
@@ -110,6 +112,7 @@ const testimonials = [
             description="Watch your mental wellness bloom. Log your moods to grow a digital garden that rewards your mindfulness."
             icon="sprout"
             class="reveal md:col-span-8"
+            delay={0}
           >
             <Icon name="sprout" class="absolute -bottom-10 right-5 size-52 text-bloom/5 transition duration-700 group-hover:scale-105 group-hover:text-bloom/10" />
           </FeatureCard>
@@ -120,6 +123,7 @@ const testimonials = [
             icon="people"
             tone="pink"
             class="reveal md:col-span-4"
+            delay={70}
           />
 
           <FeatureCard
@@ -128,11 +132,12 @@ const testimonials = [
             icon="clock"
             tone="plum"
             class="reveal md:col-span-4"
+            delay={140}
           />
 
-          <article class="reveal relative grid min-h-72 overflow-hidden rounded-2xl bg-rose md:col-span-8 md:grid-cols-[1.1fr_.9fr]">
+          <article class="feature-card reveal relative grid min-h-72 overflow-hidden rounded-2xl bg-rose md:col-span-8 md:grid-cols-[1.1fr_.9fr]" style="--reveal-delay:210ms">
             <div class="relative z-10 flex flex-col justify-center space-y-5 p-8 sm:p-10">
-              <div class="grid size-12 place-items-center rounded-xl bg-bloom/10 text-bloom">
+              <div class="icon-tile grid size-12 place-items-center rounded-xl bg-bloom/10 text-bloom">
                 <Icon name="shield" class="size-7" />
               </div>
               <h3 class="text-2xl font-medium tracking-[-0.02em] text-plum">Clinical Roots, Cultural Heart</h3>
@@ -143,20 +148,21 @@ const testimonials = [
               alt="Hands nurture a young green seedling in a clay pot."
               widths={[512, 768]}
               sizes="(max-width: 768px) 100vw, 35vw"
-              class="h-64 w-full object-cover md:h-full"
+              class="feature-image h-64 w-full object-cover md:h-full"
             />
           </article>
         </div>
       </div>
     </section>
 
-    <section id="stories" class="section-space bg-soft/80">
-      <div class="page-shell">
+    <section id="stories" class="section-space relative overflow-hidden bg-soft/80">
+      <Icon name="flower" class="section-motif pointer-events-none absolute -right-10 top-10 size-56 rotate-12 text-bloom/[.035]" />
+      <div class="page-shell relative z-10">
         <SectionIntro title="Hear from our Mamas" />
         <div class="mt-16 grid gap-8 md:grid-cols-3">
           {testimonials.map((testimonial, index) => (
-            <div class="reveal">
-              <TestimonialCard {...testimonial} offset={index === 1} />
+            <div class="reveal h-full" style={`--reveal-delay:${index * 70}ms`}>
+              <TestimonialCard {...testimonial} />
             </div>
           ))}
         </div>
