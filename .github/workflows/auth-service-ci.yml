@@ -17,8 +17,12 @@ jobs:
         working-directory: services/auth-service
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: oven-sh/setup-bun@v2
         with:
-          node-version: "20"
-      - run: npm install
-      - run: npm run build
+          bun-version: latest
+      - run: bun install
+      - run: bun run build
+        env:
+          BETTER_AUTH_SECRET: ci-build-secret-not-for-runtime-0123456789
+          GOOGLE_CLIENT_ID: ci-google-client-id
+          GOOGLE_CLIENT_SECRET: ci-google-client-secret

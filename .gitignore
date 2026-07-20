@@ -24,3 +24,6 @@ caddy_config/
 .DS_Store
 .idea/
 .vscode/
+
+# Next.js generated
+next-env.d.ts

@@ -2,7 +2,7 @@
 
 A healthcare SaaS platform for maternal care, built as a **modular monolith**
 backend plus a small set of web frontends and one dedicated auth service.
-Web-only stack: **Go, Astro, Svelte, Next.js**, with **BetterAuth** for
+Web-only stack: **Go, Astro, Next.js**, with **BetterAuth** for
 authentication. No mobile, no Firebase.
 
 ## Repo layout
@@ -26,7 +26,6 @@ uzazi/
 │   └── auth-service/          # Next.js app running BetterAuth (the ONLY issuer)
 ├── frontends/
 │   ├── marketing-astro/       # public landing page
-│   ├── admin-svelte/          # health-worker / admin dashboard
 │   └── app-nextjs/            # mother-facing app
 └── infra/
     ├── docker-compose.yml     # everything, one command
@@ -55,7 +54,7 @@ auto-migrates on its own — that's what keeps the two consumers from diverging.
 2. Run `sqlc generate` from `db/` — regenerates `backend/internal/db`.
    **Never edit generated code by hand.**
 3. If the change touches auth tables (`user`/`session`/`account`/`verification`),
-   run `npm run auth:generate` in `services/auth-service`, fold any diff back
+   run `bun run auth:generate` in `services/auth-service`, fold any diff back
    into `db/migrations/`, and update the field mapping in `lib/auth.ts`.
 
 CI (`backend-ci`) runs `sqlc generate` and fails if the committed code is stale.
@@ -83,18 +82,17 @@ docker compose up --build
 ```
 
 This brings up postgres, redis, the migration runner, the backend, the
-auth-service, all three frontends, and Caddy. Migrations run automatically
+auth-service, both frontends, and Caddy. Migrations run automatically
 before the backend and auth-service start.
 
 | Service          | Direct URL              | Via Caddy               |
 | ---------------- | ----------------------- | ----------------------- |
 | Marketing        | http://localhost:4321   | http://uzazi.localhost  |
 | Mother app       | http://localhost:3001   | http://app.localhost    |
-| Admin dashboard  | http://localhost:5173   | http://admin.localhost  |
 | Auth (BetterAuth)| http://localhost:3000   | http://auth.localhost   |
 | Backend API      | http://localhost:8080   | http://api.localhost    |
 
-Each frontend's placeholder page shows the backend `/healthz` status and offers
+Each frontend shows the backend `/healthz` status and offers
 a BetterAuth sign-in round trip.
 
 ## Branch & PR workflow
@@ -114,6 +112,5 @@ a BetterAuth sign-in round trip.
 | `backend/`                      | Deluxe                            |
 | `services/auth-service/`        | Deluxe, Isaac                     |
 | `frontends/marketing-astro/`    | Deluxe                            |
-| `frontends/admin-svelte/`       | Deluxe                            |
 | `frontends/app-nextjs/`         | Deluxe, Isaac, Roro, Vincent      |
 | `.github/`                      | Deluxe                            |

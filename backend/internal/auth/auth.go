@@ -9,19 +9,8 @@ import (
 	"github.com/MicahParks/keyfunc/v3"
 	"github.com/golang-jwt/jwt/v5"
 
-	"github.com/deluxesande/uzazi/backend/internal/db"
+	"github.com/deluxesande/uzazi-monolith/backend/internal/db"
 )
-
-// Verifier validates BetterAuth-issued JWTs. BetterAuth (services/auth-service)
-// is the ONLY credential issuer in the stack. This package never signs or
-// issues anything — it checks signature + expiry against the auth-service JWKS
-// and loads the user through sqlc-generated queries.
-type Verifier struct {
-	jwks    keyfunc.Keyfunc
-	queries *db.Queries
-}
-
-type ctxKey struct{}
 
 // NewVerifier fetches the JWKS from the auth-service (e.g.
 // http://auth-service:3000/api/auth/jwks). Returns an error if unreachable so

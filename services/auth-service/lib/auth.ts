@@ -2,13 +2,22 @@ import { betterAuth } from "better-auth";
 import { bearer, jwt } from "better-auth/plugins";
 import { Pool } from "pg";
 
+const googleClientId = process.env.GOOGLE_CLIENT_ID;
+const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET;
+
+if (!googleClientId || !googleClientSecret) {
+  throw new Error(
+    "Missing Google OAuth configuration: set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET.",
+  );
+}
+
 // BetterAuth is the ONLY credential issuer in uzazi. It reads the SAME tables
 // defined in db/migrations (the single source of truth), NOT its own
 // auto-generated schema.
 //
 // Workflow when auth tables change:
 //   1. edit db/migrations/
-//   2. run `npm run auth:generate` to see BetterAuth's expected schema
+//   2. run `bun run auth:generate` to see BetterAuth's expected schema
 //   3. hand-fold any diff INTO db/migrations/ (never keep a second schema)
 //   4. keep the field names below in sync
 export const auth = betterAuth({
@@ -18,14 +27,12 @@ export const auth = betterAuth({
 
   emailAndPassword: { enabled: true },
 
-  socialProviders: process.env.GITHUB_CLIENT_ID
-    ? {
-        github: {
-          clientId: process.env.GITHUB_CLIENT_ID,
-          clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
-        },
-      }
-    : undefined,
+  socialProviders: {
+    google: {
+      clientId: googleClientId,
+      clientSecret: googleClientSecret,
+    },
+  },
 
   // jwt() publishes a JWKS at /api/auth/jwks — the Go backend verifies tokens
   // against it. bearer() lets non-cookie clients authenticate with

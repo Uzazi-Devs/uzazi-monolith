@@ -1,14 +1,11 @@
 # Code owners. Every PR touching a path needs approval from its owner(s).
-# TODO: replace @isaac-handle / @roro-handle / @vincent-handle with real logins
-# once confirmed.
 
 # Schema is the single source of truth — a change here can break BOTH the
 # backend and the auth-service, so it always needs @deluxesande.
 /db/migrations/                 @deluxesande
 
 /backend/                       @deluxesande
-/services/auth-service/         @deluxesande @isaac-handle
+/services/auth-service/         @deluxesande
 /frontends/marketing-astro/     @deluxesande
-/frontends/admin-svelte/        @deluxesande
-/frontends/app-nextjs/          @deluxesande @isaac-handle @roro-handle @vincent-handle
+/frontends/app-nextjs/          @deluxesande
 /.github/                       @deluxesande
