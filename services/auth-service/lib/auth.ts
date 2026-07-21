@@ -5,9 +5,13 @@ import { Pool } from "pg";
 const googleClientId = process.env.GOOGLE_CLIENT_ID;
 const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET;
 
-if (!googleClientId || !googleClientSecret) {
+//Google auth is Optional ,but both values must be provided together
+if (
+  (googleClientId && !googleClientSecret) ||
+  (!googleClientId && googleClientSecret)
+) {
   throw new Error(
-    "Missing Google OAuth configuration: set GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET.",
+    "Both GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET must be set together.",
   );
 }
 
@@ -20,6 +24,15 @@ if (!googleClientId || !googleClientSecret) {
 //   2. run `bun run auth:generate` to see BetterAuth's expected schema
 //   3. hand-fold any diff INTO db/migrations/ (never keep a second schema)
 //   4. keep the field names below in sync
+const socialProviders =
+  googleClientId && googleClientSecret
+    ? {
+        google: {
+          clientId: googleClientId,
+          clientSecret: googleClientSecret,
+        },
+      }
+    : {};
 export const auth = betterAuth({
   database: new Pool({ connectionString: process.env.DATABASE_URL }),
   baseURL: process.env.BETTER_AUTH_URL ?? "http://localhost:3000",
@@ -27,12 +40,7 @@ export const auth = betterAuth({
 
   emailAndPassword: { enabled: true },
 
-  socialProviders: {
-    google: {
-      clientId: googleClientId,
-      clientSecret: googleClientSecret,
-    },
-  },
+  socialProviders,
 
   // jwt() publishes a JWKS at /api/auth/jwks — the Go backend verifies tokens
   // against it. bearer() lets non-cookie clients authenticate with
