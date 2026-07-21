@@ -1,22 +1,175 @@
 ---
+import { Image } from "astro:assets";
+import motherAndBaby from "../assets/mother-and-baby.jpg";
+import growthRitual from "../assets/growth-ritual.jpg";
 import Baselayout from "../layouts/Baselayout.astro";
+import ButtonLink from "../components/ButtonLink.astro";
+import FeatureCard from "../components/FeatureCard.astro";
+import Icon from "../components/Icon.astro";
+import SectionIntro from "../components/SectionIntro.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import TestimonialCard from "../components/TestimonialCard.astro";
 import "../styles/global.css";
 
-const BACKEND = import.meta.env.PUBLIC_BACKEND_URL ?? "http://localhost:8080";
-const AUTH = import.meta.env.PUBLIC_AUTH_URL ?? "http://localhost:3000";
+const WAITLIST = "/waitlist";
 
-let health = "unreachable";
-try {
-    const r = await fetch(`${BACKEND}/healthz`);
-    health = (await r.json()).status;
-} catch {
-    // backend not up at build time — fine for the marketing page
-}
+const testimonials = [
+  {
+    quote: "Uzazi felt like a warm hug during those lonely 3 AM feedings. The daily rituals kept me grounded when everything felt chaotic.",
+    name: "Amara K.",
+    detail: "Mama of 3 months",
+  },
+  {
+    quote: "Finding a circle of sisters who understand our cultural traditions made all the difference in my healing process.",
+    name: "Zainab O.",
+    detail: "New Mama",
+  },
+  {
+    quote: "The garden metaphor is so beautiful. Seeing my mental wellness bloom visually really motivated me to keep checking in.",
+    name: "Nia M.",
+    detail: "Mama of Twins",
+  },
+];
 ---
 
 <Baselayout>
-    <h1>uzazi</h1>
-    <p>Healthcare, closer to every mother.</p>
-    <p>Backend <code>/healthz</code> (checked at build): <b>{health}</b></p>
-    <a href={AUTH}>Sign in</a>
+  <SiteHeader authUrl={WAITLIST} />
+
+  <main id="main-content" class="garden-dots overflow-hidden">
+    <section class="ambient-field relative py-14 sm:py-20 lg:py-24">
+      <div class="pointer-events-none absolute -right-28 top-2 size-96 rounded-full bg-rose/35 blur-3xl"></div>
+      <div class="page-shell grid items-center gap-16 lg:grid-cols-2 lg:gap-14">
+        <div class="hero-copy relative z-10 space-y-7 lg:py-8">
+          <h1 class="max-w-[19ch] text-balance text-[clamp(2.75rem,4.5vw,3.5rem)] font-bold leading-[1.08] tracking-[-0.025em] text-ink">
+            Nurturing the village that nurtures the child.
+          </h1>
+          <p class="max-w-[46ch] text-pretty text-base leading-7 text-copy sm:text-lg sm:leading-8">
+            Uzazi is your gentle companion through early motherhood, designed for the African experience with warmth, ritual, and shared wisdom.
+          </p>
+          <div class="flex flex-col gap-3 pt-2 sm:flex-row sm:flex-wrap">
+            <ButtonLink href={WAITLIST} class="sm:px-10">Start Your Journey</ButtonLink>
+            <ButtonLink href="#stories" variant="secondary" class="sm:px-10">Meet the Sisters</ButtonLink>
+          </div>
+        </div>
+
+        <div class="hero-visual relative mx-auto w-full max-w-2xl pb-16 lg:pb-10">
+          <div class="hero-arch relative aspect-[4/4.15] overflow-hidden bg-soft shadow-[0_18px_45px_rgba(114,36,62,.12)]">
+            <Image
+              src={motherAndBaby}
+              alt="A mother smiles while holding her sleeping newborn in warm morning light."
+              widths={[512, 768, 1024]}
+              sizes="(max-width: 1024px) 90vw, 52vw"
+              class="h-full w-full object-cover object-center transition duration-700 ease-out hover:scale-[1.025]"
+              loading="eager"
+            />
+          </div>
+          <aside class="mascot-card absolute bottom-0 left-1/2 flex w-[min(90%,18rem)] -translate-x-1/2 items-start gap-4 rounded-2xl bg-white p-5 shadow-[0_10px_24px_rgba(90,45,60,.13)] lg:-left-8 lg:translate-x-0" aria-label="Encouragement from Mama Bear">
+            <span class="grid size-12 shrink-0 place-items-center rounded-full bg-rose text-bloom">
+              <Icon name="heart" class="size-5" />
+            </span>
+            <span>
+              <span class="mb-1 block text-sm font-semibold italic text-copy">Mama Bear says:</span>
+              <span class="block text-sm font-medium leading-5 text-ink">“You’re doing amazing today, mama. Remember to hydrate!”</span>
+            </span>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" class="section-space relative overflow-hidden bg-white">
+      <Icon name="sprout" class="pointer-events-none absolute -right-20 top-20 size-72 rotate-[-18deg] text-bloom/[.035]" />
+      <Icon name="flower" class="pointer-events-none absolute -left-16 bottom-14 size-52 text-bloom/[.03]" />
+      <div class="page-shell relative z-10">
+        <SectionIntro title="Built for your daily rhythm" />
+
+        <div class="mt-16 grid gap-8 md:grid-cols-12">
+          <FeatureCard
+            title="Emotional Garden"
+            description="Watch your mental wellness bloom. Log your moods to grow a digital garden that rewards your mindfulness."
+            icon="sprout"
+            class="reveal md:col-span-8"
+            delay={0}
+          >
+            <Icon name="sprout" class="absolute -bottom-10 right-5 size-52 text-bloom/5 transition duration-700 group-hover:scale-105 group-hover:text-bloom/10" />
+          </FeatureCard>
+
+          <FeatureCard
+            title="Sisters Circle"
+            description="Secure, curated micro-communities of mothers in your local city or stage."
+            icon="people"
+            tone="pink"
+            class="reveal md:col-span-4"
+            delay={70}
+          />
+
+          <FeatureCard
+            title="Daily Rituals"
+            description="Two-minute check-ins that guide your healing and bonding through postpartum."
+            icon="clock"
+            tone="plum"
+            class="reveal md:col-span-4"
+            delay={140}
+          />
+
+          <article class="feature-card reveal relative grid min-h-72 overflow-hidden rounded-2xl bg-rose md:col-span-8 md:grid-cols-[1.1fr_.9fr]" style="--reveal-delay:210ms">
+            <div class="relative z-10 flex flex-col justify-center space-y-5 p-8 sm:p-10">
+              <div class="icon-tile grid size-12 place-items-center rounded-xl bg-bloom/10 text-bloom">
+                <Icon name="shield" class="size-7" />
+              </div>
+              <h3 class="text-2xl font-medium tracking-[-0.02em] text-plum">Clinical Roots, Cultural Heart</h3>
+              <p class="max-w-[38ch] text-lg leading-7 text-bloom">Evidence-based tools translated through the lens of African motherhood rituals.</p>
+            </div>
+            <Image
+              src={growthRitual}
+              alt="Hands nurture a young green seedling in a clay pot."
+              widths={[512, 768]}
+              sizes="(max-width: 768px) 100vw, 35vw"
+              class="feature-image h-64 w-full object-cover md:h-full"
+            />
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="stories" class="section-space relative overflow-hidden bg-soft/80">
+      <Icon name="flower" class="pointer-events-none absolute -right-10 top-10 size-56 rotate-12 text-bloom/[.035]" />
+      <div class="page-shell relative z-10">
+        <SectionIntro title="Hear from our Mamas" />
+        <div class="mt-16 grid gap-10 md:grid-cols-[1.2fr_1fr_1fr]">
+          {testimonials.map((testimonial, index) => (
+            <div class="reveal h-full" style={`--reveal-delay:${index * 70}ms`}>
+              <TestimonialCard {...testimonial} />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <SiteFooter authUrl={WAITLIST} />
+
+  <script>
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches && "IntersectionObserver" in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+
+          const delay = Number.parseFloat(getComputedStyle(entry.target).getPropertyValue("--reveal-delay")) || 0;
+          entry.target.animate(
+            [
+              { opacity: 0.82, transform: "translateY(14px)", filter: "blur(2px)" },
+              { opacity: 1, transform: "translateY(0)", filter: "blur(0)" },
+            ],
+            { duration: 520, delay, easing: "cubic-bezier(.22, 1, .36, 1)", fill: "backwards" },
+          );
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.12, rootMargin: "0px 0px -40px" });
+
+      document.querySelectorAll(".reveal").forEach((item) => observer.observe(item));
+    }
+
+  </script>
 </Baselayout>

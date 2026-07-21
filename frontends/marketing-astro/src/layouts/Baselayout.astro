@@ -1,17 +1,25 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Uzazi</title>
-    </head>
-    <body>
-        <header>
-            <nav></nav>
-        </header>
-        <slot />
-        <footer></footer>
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+const {
+  title = "Uzazi — Nurturing the village",
+  description = "A gentle postpartum wellness companion designed for African mothers.",
+} = Astro.props;
+---
 
-        <slot name="scripts" />
-    </body>
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#fbf9f4" />
+    <title>{title}</title>
+  </head>
+  <body id="top" class="bg-canvas text-ink antialiased">
+    <a href="#main-content" class="fixed left-4 top-4 z-50 -translate-y-24 rounded-lg bg-ink px-4 py-3 text-sm font-semibold text-white transition-transform duration-200 focus:translate-y-0">Skip to main content</a>
+    <slot />
+  </body>
 </html>
