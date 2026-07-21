@@ -99,6 +99,15 @@ a BetterAuth sign-in round trip.
 
 - **No direct pushes to `main`.** Branch protection requires a PR with **1
   approval** and passing status checks (admins included).
+- GitHub rulesets are not enforced on this private repo (Free org plan), so
+  two guards back the rule up:
+  - **Local pre-push hook** — after cloning, run once:
+    ```bash
+    git config core.hooksPath .githooks
+    ```
+    This blocks `git push` to `main` from your machine.
+  - **`protect-main` workflow** — CI fails on any commit that lands on `main`
+    without a merged PR, so accidents are flagged immediately.
 - Branch naming: `feature/<name>`, `fix/<name>`, `chore/<name>`.
 - Every PR uses the template checklist. PRs touching `db/migrations/` require
   **@deluxe** approval (see `.github/CODEOWNERS`) because a schema change there
@@ -109,8 +118,8 @@ a BetterAuth sign-in round trip.
 | Area                            | Owner(s)                          |
 | ------------------------------- | --------------------------------- |
 | `db/migrations/`                | Deluxe                            |
-| `backend/`                      | Deluxe                            |
-| `services/auth-service/`        | Deluxe, Isaac                     |
+| `backend/`                      | Deluxe, Vincent                   |
+| `services/auth-service/`        | Deluxe, Vincent                   |
 | `frontends/marketing-astro/`    | Deluxe                            |
-| `frontends/app-nextjs/`         | Deluxe, Isaac, Roro, Vincent      |
+| `frontends/app-nextjs/`         | Roro, Isaac                       |
 | `.github/`                      | Deluxe                            |
