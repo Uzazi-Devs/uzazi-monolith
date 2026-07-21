@@ -3,7 +3,7 @@ package media
 import (
 	"context"
 
-	"github.com/deluxesande/uzazi-monolith/backend/internal/db"
+	"github.com/Uzazi-Devs/uzazi-monolith/backend/internal/db"
 )
 
 func NewService(q *db.Queries) Service { return &service{q: q} }

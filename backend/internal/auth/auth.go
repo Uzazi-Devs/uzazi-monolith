@@ -9,7 +9,7 @@ import (
 	"github.com/MicahParks/keyfunc/v3"
 	"github.com/golang-jwt/jwt/v5"
 
-	"github.com/deluxesande/uzazi-monolith/backend/internal/db"
+	"github.com/Uzazi-Devs/uzazi-monolith/backend/internal/db"
 )
 
 // NewVerifier fetches the JWKS from the auth-service (e.g.

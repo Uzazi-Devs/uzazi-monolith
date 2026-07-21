@@ -3,7 +3,7 @@ package auth
 import (
 	"github.com/MicahParks/keyfunc/v3"
 
-	"github.com/deluxesande/uzazi-monolith/backend/internal/db"
+	"github.com/Uzazi-Devs/uzazi-monolith/backend/internal/db"
 )
 
 // Verifier validates BetterAuth-issued JWTs. BetterAuth (services/auth-service)
