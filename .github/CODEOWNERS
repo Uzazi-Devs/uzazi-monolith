@@ -1,9 +1,4 @@
 # Code owners. Every PR touching a path needs approval from its owner(s).
-#
-# Team:
-#   Backend:  @deluxesande (TL), @Sewyn-Codes (Vincent)
-#   Frontend (dashboards): @Ronald-Wesh (TL, Roro), @isaack205 (Isaac)
-#   Astro marketing site + DevOps: @deluxesande
 
 # Schema is the single source of truth — a change here can break BOTH the
 # backend and the auth-service, so it always needs @deluxesande.
@@ -12,6 +7,5 @@
 /backend/                       @deluxesande @Sewyn-Codes
 /services/auth-service/         @deluxesande @Sewyn-Codes
 /frontends/marketing-astro/     @deluxesande
-/frontends/app-nextjs/          @Ronald-Wesh @isaack205
-/infra/                         @deluxesande
+/frontends/app-nextjs/          @Ronald-Wesh @isaac205
 /.github/                       @deluxesande
