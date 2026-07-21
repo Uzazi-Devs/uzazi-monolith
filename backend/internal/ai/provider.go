@@ -3,7 +3,6 @@ package ai
 import (
 	"bytes"
 	"context"
-	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -59,50 +58,4 @@ func (g GemmaProvider) call(ctx context.Context, req genContentRequest) (string,
 		return "", fmt.Errorf("empty response from gemini api")
 	}
 	return parsed.Candidates[0].Content.Parts[0].Text, nil
-}
-
-func (g GemmaProvider) AnalyzeText(ctx context.Context, text string) (Analysis, error) {
-	req := genContentRequest{
-		SystemInstruction: &content{Parts: []part{{
-			Text: `Analyze the following journal entry for signs of postpartum depression risk.
-Respond ONLY with JSON in this exact shape: {"summary": "...", "labels": ["..."]}`,
-		}}},
-		Contents: []content{{Parts: []part{{Text: text}}}},
-	}
-
-	raw, err := g.call(ctx, req)
-	if err != nil {
-		return Analysis{}, err
-	}
-
-	var result Analysis
-	if err := json.Unmarshal([]byte(raw), &result); err != nil {
-		return Analysis{}, fmt.Errorf("model did not return valid JSON: %w", err)
-	}
-	return result, nil
-}
-
-func (g GemmaProvider) Transcribe(ctx context.Context, audio []byte) (string, error) {
-	req := genContentRequest{
-		Contents: []content{{Parts: []part{
-			{Text: "Transcribe this audio exactly, no commentary."},
-			{InlineData: &inlineData{
-				MimeType: "audio/mp3", // match whatever format the Android/web client actually records
-				Data:     base64.StdEncoding.EncodeToString(audio),
-			}},
-		}}},
-	}
-	return g.call(ctx, req)
-}
-
-// NewProvider selects the provider by name (from AI_PROVIDER).
-func NewProvider(name string) InferenceProvider {
-	switch name {
-	case "gemma":
-		return NewGemmaProvider()
-	// case "kimi":
-	// 	return KimiProvider{...} // add when needed — no interface change
-	default:
-		return NewGemmaProvider()
-	}
 }
