@@ -3,7 +3,7 @@ package community
 import (
 	"context"
 
-	"github.com/deluxesande/uzazi-monolith/backend/internal/db"
+	"github.com/Uzazi-Devs/uzazi-monolith/backend/internal/db"
 )
 
 type Service interface {

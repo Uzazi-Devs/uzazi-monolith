@@ -3,7 +3,7 @@ package health
 import (
 	"context"
 
-	"github.com/deluxesande/uzazi-monolith/backend/internal/db"
+	"github.com/Uzazi-Devs/uzazi-monolith/backend/internal/db"
 )
 
 // Service is how other modules use health records — a Go interface, no HTTP.

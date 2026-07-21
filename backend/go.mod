@@ -1,4 +1,4 @@
-module github.com/deluxesande/uzazi-monolith/backend
+module github.com/Uzazi-Devs/uzazi-monolith/backend
 
 go 1.22
 
