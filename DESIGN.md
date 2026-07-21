@@ -198,7 +198,7 @@ Components should feel tactile, generous, and emotionally safe. Platform-native 
 
 ### Buttons
 
-- **Shape:** Full pill for primary and secondary actions. Minimum height is 48px on web and 48dp on Android.
+- **Shape:** Full pill for primary and secondary actions. General web tappable targets must be at least 44px; buttons and form controls must be at least 48px on web and 48dp on Android.
 - **Primary:** Bloom Pink fill, White text, Button Glow shadow, medium/semibold label. Hover on web moves `translateY(-2px)` or less and darkens to Deep Plum. Press scales to about `0.97-0.98`.
 - **Secondary:** Transparent or White background, Petal border, Ink text. Hover/focus may shift to White or Soft Surface.
 - **Focus:** Always visible. Web uses a 2px Bloom outline with 4px offset. Android uses the platform focus/pressed indication tinted Bloom or Rose.
@@ -247,7 +247,7 @@ Components should feel tactile, generous, and emotionally safe. Platform-native 
 - **Scroll Reveal:** Content is visible by default. On capable clients, animate from `opacity: .82`, `translateY(14px)`, `blur(2px)` to rest over `520ms`, with 70ms item staggers. Never gate visibility on JavaScript.
 - **Menu Entrance:** Mobile menu/sheet appears with a small `translateY(-6px) scale(.97)` to rest over `180ms`, origin at top/right or sheet edge.
 - **Micro Lift:** Buttons and cards lift only a few pixels. Feature cards can lift up to `6px`; buttons should stay around `2px`.
-- **Android Translation:** Use Compose `tween(durationMillis = 180-760, easing = CubicBezierEasing(0.22f, 1f, 0.36f, 1f))`. Use critically damped springs only for platform-native gestures; do not add bounce or elastic effects.
+- **Android Translation:** Use Compose `tween(durationMillis = 520, easing = CubicBezierEasing(0.22f, 1f, 0.36f, 1f))` as the default reveal timing. Choose shorter or longer tweens within the 180-760ms range to match the motion pattern. Use critically damped springs only for platform-native gestures; do not add bounce or elastic effects.
 - **Reduced Motion:** Required on every platform. Web uses `prefers-reduced-motion`; Android respects system animator duration scale and reduced motion/accessibility settings. Replace movement with instant state changes or gentle crossfades.
 
 ## 6. Do's and Don'ts
