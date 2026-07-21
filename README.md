@@ -99,8 +99,10 @@ a BetterAuth sign-in round trip.
 
 - **No direct pushes to `main`.** Branch protection requires a PR with **1
   approval** and passing status checks (admins included).
-- GitHub rulesets are not enforced on this private repo (Free org plan), so
-  two guards back the rule up:
+- The active GitHub `protect-main` ruleset applies to the default branch and
+  blocks deletion, force-pushes, and direct updates. Changes must go through a
+  PR with 1 approval, matching CODEOWNERS where configured, and required checks.
+- Two backup guards remain in the repo:
   - **Local pre-push hook** — after cloning, run once:
     ```bash
     git config core.hooksPath .githooks
