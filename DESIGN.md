@@ -267,11 +267,9 @@ Components should feel tactile, generous, and emotionally safe. Platform-native 
 
 ### Don't:
 
-- **Don't** make this Astro-specific. Do not document class names as the source of truth; document the underlying design rule and token.
 - **Don't** use hospital blue, generic wellness teal, neon purple gradients, or cold grayscale dashboards as the Uzazi default.
 - **Don't** use repeated tiny uppercase eyebrows, numbered section markers, or identical icon-card grids as page scaffolding.
 - **Don't** rely on emoji as the primary visual system. Emoji can support journaling moments, but icons, copy, layout, and mascot language carry the brand.
-- **Don't** animate layout properties or create bouncy/elastic motion. Uzazi motion settles softly.
 - **Don't** hide content until animation JavaScript runs. Content must be readable if animation fails.
 - **Don't** use heavy shadows on ordinary cards or pair borders with large generic shadows.
 - **Don't** over-round normal cards past 24px/dp. Save full pills for actions, chips, and progress rails.
