@@ -5,9 +5,6 @@ on:
       - "frontends/app-nextjs/**"
       - ".github/workflows/nextjs-ci.yml"
   pull_request:
-    paths:
-      - "frontends/app-nextjs/**"
-      - ".github/workflows/nextjs-ci.yml"
 
 jobs:
   build:

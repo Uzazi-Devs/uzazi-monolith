@@ -6,10 +6,6 @@ on:
       - "db/**"
       - ".github/workflows/backend-ci.yml"
   pull_request:
-    paths:
-      - "backend/**"
-      - "db/**"
-      - ".github/workflows/backend-ci.yml"
 
 jobs:
   build:

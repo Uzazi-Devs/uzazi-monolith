@@ -5,9 +5,6 @@ on:
       - "frontends/marketing-astro/**"
       - ".github/workflows/astro-ci.yml"
   pull_request:
-    paths:
-      - "frontends/marketing-astro/**"
-      - ".github/workflows/astro-ci.yml"
 
 jobs:
   build:
