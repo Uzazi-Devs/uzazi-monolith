@@ -9,6 +9,8 @@ authentication. No mobile, no Firebase.
 
 ```
 uzazi/
+├── package.json               # root Bun workspace & Turborepo scripts
+├── turbo.json                 # Turborepo task pipeline & caching
 ├── db/
 │   ├── migrations/            # SINGLE SOURCE OF TRUTH — plain SQL, one runner
 │   └── sqlc.yaml              # generates typed Go code into backend/internal/db
@@ -30,6 +32,17 @@ uzazi/
 └── infra/
     ├── docker-compose.yml     # everything, one command
     └── caddy/Caddyfile        # reverse proxy by subdomain
+```
+
+## Monorepo tooling
+
+The repository uses **Bun Workspaces** and **Turborepo** to manage and orchestrate the web apps and TypeScript services:
+
+```bash
+bun install             # install & link all workspace dependencies from root
+bun run build           # build all apps with Turborepo caching (>>> FULL TURBO)
+bun run typecheck       # typecheck all TS/JS packages across the repository
+bun run dev             # run development servers in parallel
 ```
 
 ## Architecture notes
