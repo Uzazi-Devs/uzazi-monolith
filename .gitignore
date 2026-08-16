@@ -9,6 +9,7 @@ dist/
 .next/
 .svelte-kit/
 .astro/
+.turbo/
 build/
 
 # Env
