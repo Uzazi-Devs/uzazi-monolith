@@ -6,7 +6,9 @@
     "dev": "next dev -p 3000",
     "build": "next build",
     "start": "next start -p 3000",
-    "auth:generate": "bunx @better-auth/cli@latest generate"
+    "auth:generate": "bunx @better-auth/cli@latest generate",
+    "typecheck": "tsc --noEmit",
+    "check": "tsc --noEmit"
   },
   "dependencies": {
     "better-auth": "^1.2.0",
