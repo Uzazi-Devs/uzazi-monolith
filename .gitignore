@@ -11,6 +11,7 @@ dist/
 .astro/
 .turbo/
 build/
+*.tsbuildinfo
 
 # Env
 .env
