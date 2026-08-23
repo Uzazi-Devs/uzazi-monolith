@@ -81,12 +81,13 @@ type Verification struct {
 }
 
 type WaitlistSignup struct {
-	ID        pgtype.UUID        `json:"id"`
-	Name      string             `json:"name"`
-	Email     string             `json:"email"`
-	Stage     string             `json:"stage"`
-	Location  string             `json:"location"`
-	Support   string             `json:"support"`
-	Status    string             `json:"status"`
-	CreatedAt pgtype.Timestamptz `json:"created_at"`
+	ID          pgtype.UUID        `json:"id"`
+	Name        string             `json:"name"`
+	Email       string             `json:"email"`
+	Stage       string             `json:"stage"`
+	Location    string             `json:"location"`
+	Support     string             `json:"support"`
+	Status      string             `json:"status"`
+	CreatedAt   pgtype.Timestamptz `json:"created_at"`
+	ConsentedAt pgtype.Timestamptz `json:"consented_at"`
 }

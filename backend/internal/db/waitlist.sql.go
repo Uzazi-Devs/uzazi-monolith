@@ -26,7 +26,7 @@ const createWaitlistSignup = `-- name: CreateWaitlistSignup :one
 INSERT INTO waitlist_signup (name, email, stage, location, support)
 VALUES ($1, $2, $3, $4, $5)
 ON CONFLICT (lower(email)) DO NOTHING
-RETURNING id, name, email, stage, location, support, status, created_at
+RETURNING id, name, email, stage, location, support, status, created_at, consented_at
 `
 
 type CreateWaitlistSignupParams struct {
@@ -55,12 +55,13 @@ func (q *Queries) CreateWaitlistSignup(ctx context.Context, arg CreateWaitlistSi
 		&i.Support,
 		&i.Status,
 		&i.CreatedAt,
+		&i.ConsentedAt,
 	)
 	return i, err
 }
 
 const listWaitlistSignups = `-- name: ListWaitlistSignups :many
-SELECT id, name, email, stage, location, support, status, created_at FROM waitlist_signup
+SELECT id, name, email, stage, location, support, status, created_at, consented_at FROM waitlist_signup
 ORDER BY created_at DESC
 `
 
@@ -82,6 +83,7 @@ func (q *Queries) ListWaitlistSignups(ctx context.Context) ([]WaitlistSignup, er
 			&i.Support,
 			&i.Status,
 			&i.CreatedAt,
+			&i.ConsentedAt,
 		); err != nil {
 			return nil, err
 		}
