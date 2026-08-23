@@ -2,10 +2,12 @@
 interface Props {
   title: string;
   align?: "center" | "left";
+  tone?: "ink" | "plum" | "white";
 }
-const { title, align = "center" } = Astro.props;
+const { title, align = "center", tone = "ink" } = Astro.props;
+const tones = { ink: "text-ink", plum: "text-plum", white: "text-white" };
 ---
 
 <header class:list={[align === "center" && "text-center"]}>
-  <h2 class="text-balance text-3xl font-medium tracking-[-0.025em] text-ink sm:text-4xl">{title}</h2>
+  <h2 class:list={["text-balance text-3xl font-medium tracking-[-0.025em] sm:text-4xl", tones[tone]]}>{title}</h2>
 </header>
