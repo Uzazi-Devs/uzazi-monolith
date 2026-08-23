@@ -9,7 +9,9 @@ dist/
 .next/
 .svelte-kit/
 .astro/
+.turbo/
 build/
+*.tsbuildinfo
 
 # Env
 .env

@@ -1,0 +1,22 @@
+{
+  "name": "uzazi-monolith",
+  "private": true,
+  "workspaces": [
+    "frontends/*",
+    "services/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "check": "turbo run check",
+    "clean": "turbo run clean"
+  },
+  "devDependencies": {
+    "turbo": "^2.4.4",
+    "typescript": "^5.6.0"
+  },
+  "packageManager": "bun@1.3.14"
+}
