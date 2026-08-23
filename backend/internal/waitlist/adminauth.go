@@ -21,7 +21,7 @@ func RequireAdmin(next http.HandlerFunc) http.HandlerFunc {
 
 		if !ok || wantUser == "" || wantPass == "" || !userMatch || !passMatch {
 			w.Header().Set("WWW-Authenticate", `Basic realm="waitlist admin"`)
-			http.Error(w, "unauthorized", http.StatusUnauthorized)
+			writeError(w, http.StatusUnauthorized, "unauthorized")
 			return
 		}
 

@@ -58,6 +58,7 @@ services:
       # Dev-only defaults — override for any real deployment.
       ADMIN_USER: admin
       ADMIN_PASS: changeme
+      CORS_ALLOWED_ORIGINS: http://uzazi.localhost,http://localhost:4321
     depends_on:
       migrate:
         condition: service_completed_successfully

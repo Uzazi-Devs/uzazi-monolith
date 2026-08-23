@@ -29,7 +29,8 @@ func main() {
 
 	mux := http.NewServeMux()
 	mux.HandleFunc("GET /healthz", health)
-	mux.HandleFunc("POST /waitlist", waitlistHandler.Create)
+	mux.HandleFunc("POST /waitlist", waitlist.WithCORS(waitlistHandler.Create))
+	mux.HandleFunc("OPTIONS /waitlist", waitlist.WithCORS(waitlistHandler.Create))
 	mux.HandleFunc("GET /admin/waitlist", waitlist.RequireAdmin(waitlistHandler.List))
 	mux.HandleFunc("POST /admin/waitlist/{id}/accept", waitlist.RequireAdmin(waitlistHandler.Accept))
 
