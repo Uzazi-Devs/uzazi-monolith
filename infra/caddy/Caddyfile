@@ -4,21 +4,21 @@
 }
 
 # Marketing site
-uzazi.localhost {
+http://uzazi.localhost {
 	reverse_proxy marketing-astro:4321
 }
 
 # Mother-facing app
-app.localhost {
+http://app.localhost {
 	reverse_proxy app-nextjs:3001
 }
 
 # BetterAuth — the single auth origin
-auth.localhost {
+http://auth.localhost {
 	reverse_proxy auth-service:3000
 }
 
 # Backend API
-api.localhost {
+http://api.localhost {
 	reverse_proxy backend:8080
 }
