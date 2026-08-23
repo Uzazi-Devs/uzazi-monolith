@@ -6,15 +6,20 @@ package db
 
 import (
 	"context"
+
+	"github.com/jackc/pgx/v5/pgtype"
 )
 
 type Querier interface {
+	AcceptWaitlistSignup(ctx context.Context, id pgtype.UUID) error
 	CreateHealthRecord(ctx context.Context, arg CreateHealthRecordParams) (HealthRecord, error)
 	CreateMediaObject(ctx context.Context, arg CreateMediaObjectParams) (MediaObject, error)
+	CreateWaitlistSignup(ctx context.Context, arg CreateWaitlistSignupParams) (WaitlistSignup, error)
 	GetSessionByToken(ctx context.Context, token string) (Session, error)
 	GetUserByID(ctx context.Context, id string) (User, error)
 	ListHealthRecordsByUser(ctx context.Context, userID string) ([]HealthRecord, error)
 	ListMessages(ctx context.Context, arg ListMessagesParams) ([]CommunityMessage, error)
+	ListWaitlistSignups(ctx context.Context) ([]WaitlistSignup, error)
 	PostMessage(ctx context.Context, arg PostMessageParams) (CommunityMessage, error)
 }
 
