@@ -36,7 +36,9 @@ services:
     restart: on-failure
 
   auth-service:
-    build: ../services/auth-service
+    build:
+      context: ..
+      dockerfile: services/auth-service/Dockerfile
     environment:
       DATABASE_URL: postgres://uzazi:uzazi@postgres:5432/uzazi?sslmode=disable
       BETTER_AUTH_URL: http://localhost:3000
