@@ -14,6 +14,49 @@ import "../styles/global.css";
 
 const WAITLIST = "/waitlist";
 
+const stats = [
+  {
+    value: "1 in 4",
+    label: "women across East Africa experience perinatal depression",
+    source: "Pooled meta-analysis, 5 countries",
+  },
+  {
+    value: "78%",
+    label: "attend a postnatal checkup within two days of birth",
+    source: "2022 Kenya DHS",
+  },
+  {
+    value: "1 : 200,000",
+    label: "psychiatric providers to people outside Nairobi",
+    source: "~180 psychiatric nurses nationwide",
+  },
+];
+
+const journey = [
+  { stage: "Expecting", detail: "Name what you will need, before you need it." },
+  { stage: "The first three months", detail: "Check-ins that notice a pattern before you do." },
+  { stage: "Four to twelve months", detail: "Sleep, identity, work — the slow return to yourself." },
+  { stage: "Beyond the first year", detail: "You stay in the circle, often as the one holding someone else." },
+];
+
+const commitments = [
+  {
+    title: "Evidence-based, culturally grounded",
+    detail: "Validated screening tools, retold through African postpartum practice.",
+    icon: "sprout",
+  },
+  {
+    title: "Private by default",
+    detail: "Your entries belong to you. Small circles, no data sold.",
+    icon: "shield",
+  },
+  {
+    title: "Human when it counts",
+    detail: "When an app is not enough, we help you find real support nearby.",
+    icon: "people",
+  },
+] as const;
+
 const testimonials = [
   {
     quote: "Uzazi felt like a warm hug during those lonely 3 AM feedings. The daily rituals kept me grounded when everything felt chaotic.",
@@ -77,6 +120,35 @@ const testimonials = [
       </div>
     </section>
 
+    <section id="why" class="section-space relative overflow-hidden">
+      <Icon name="flower" class="pointer-events-none absolute -left-16 top-16 size-64 rotate-[14deg] text-bloom/[.03]" />
+      <div class="page-shell relative z-10">
+        <div class="grid gap-12 lg:grid-cols-[1fr_.9fr] lg:items-end lg:gap-20">
+          <div>
+            <SectionIntro title="Why we built Uzazi" align="left" />
+            <p class="mt-6 max-w-[30ch] text-balance text-2xl font-medium leading-[1.22] tracking-[-0.025em] text-plum sm:text-[2rem]">
+              Nearly one in five Kenyan mothers screens positive for postpartum depression.
+            </p>
+          </div>
+          <p class="max-w-[44ch] text-pretty leading-7 text-copy">
+            It is not rare, and it is not a failure of strength. Mothers already come back for a postnatal checkup — there is simply almost no one there to ask how they are.
+          </p>
+        </div>
+
+        <dl class="mt-16 grid gap-10 sm:grid-cols-3">
+          {stats.map((stat, index) => (
+            <div class="stat-item reveal border-t border-petal pt-6" style={`--reveal-delay:${index * 70}ms`}>
+              <dt class="text-[clamp(2.25rem,4vw,3rem)] font-bold leading-none tracking-[-0.03em] text-plum">{stat.value}</dt>
+              <dd class="mt-3 space-y-2">
+                <span class="block text-sm font-medium leading-6 text-ink">{stat.label}</span>
+                <span class="block text-xs leading-5 text-muted">{stat.source}</span>
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+
     <section id="experience" class="section-space relative overflow-hidden bg-white">
       <Icon name="sprout" class="pointer-events-none absolute -right-20 top-20 size-72 rotate-[-18deg] text-bloom/[.035]" />
       <Icon name="flower" class="pointer-events-none absolute -left-16 bottom-14 size-52 text-bloom/[.03]" />
@@ -132,6 +204,83 @@ const testimonials = [
       </div>
     </section>
 
+    <section id="how" class="section-space relative overflow-hidden">
+      <div class="page-shell relative z-10 grid gap-12 lg:grid-cols-[.9fr_1fr] lg:gap-20">
+        <div class="lg:sticky lg:top-28 lg:self-start">
+          <SectionIntro title="How Uzazi holds you" align="left" />
+          <p class="mt-6 max-w-[44ch] text-pretty leading-7 text-copy">
+            Support that changes as you do — meeting you where you are, not where a textbook says you should be.
+          </p>
+          <div class="reveal-clip mt-10 hidden overflow-hidden rounded-[2rem] lg:block" data-reveal="clip">
+            <Image
+              src={growthRitual}
+              alt="Hands nurture a young green seedling in a clay pot."
+              widths={[384, 640]}
+              sizes="34vw"
+              class="h-[22rem] w-full object-cover"
+            />
+          </div>
+        </div>
+
+        <ol class="relative space-y-10 pl-8 sm:pl-10">
+          <span class="journey-stem absolute left-0 top-1 h-[calc(100%-0.5rem)] w-px origin-top bg-petal" data-reveal="stem" aria-hidden="true"></span>
+          {journey.map((step, index) => (
+            <li class="journey-step reveal relative" style={`--reveal-delay:${index * 70}ms`}>
+              <span class="journey-dot absolute -left-[2.3rem] top-2 size-3 rounded-full bg-bloom/70 ring-4 ring-canvas sm:-left-[2.8rem]" aria-hidden="true"></span>
+              <h3 class="text-xl font-medium tracking-[-0.02em] text-ink sm:text-2xl">{step.stage}</h3>
+              <p class="mt-2 max-w-[44ch] text-pretty leading-7 text-copy">{step.detail}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section id="village" class="section-space relative overflow-hidden bg-rose">
+      <div class="page-shell relative z-10 grid items-center gap-12 lg:grid-cols-[1fr_.9fr] lg:gap-20">
+        <div class="space-y-8">
+          <SectionIntro title="The village matters too" align="left" tone="plum" />
+
+          <p class="flex flex-wrap items-baseline gap-x-4 gap-y-2">
+            <span class="text-[clamp(3.5rem,7vw,5rem)] font-bold leading-none tracking-[-0.04em] text-plum">7×</span>
+            <span class="max-w-[24ch] text-pretty leading-6 text-bloom">more likely to face postpartum depression when there is conflict at home.</span>
+          </p>
+
+          <p class="max-w-[44ch] text-pretty leading-7 text-bloom sm:text-lg sm:leading-8">
+            So Uzazi opens to partners, mothers, sisters and friends — what actually helps, what to say at 3 AM, and how to notice when something has quietly shifted.
+          </p>
+        </div>
+
+        <div class="reveal-clip overflow-hidden rounded-[2rem] shadow-[0_18px_45px_rgba(114,36,62,.14)]" data-reveal="clip">
+          <Image
+            src={motherAndBaby}
+            alt="A mother holds her newborn close in soft daylight."
+            widths={[512, 768]}
+            sizes="(max-width: 1024px) 90vw, 45vw"
+            class="h-64 w-full object-cover object-center sm:h-80"
+          />
+        </div>
+      </div>
+    </section>
+
+    <section id="trust" class="section-space relative overflow-hidden bg-plum text-white">
+      <Icon name="shield" class="pointer-events-none absolute -right-12 top-16 size-60 rotate-[-10deg] text-white/[.05]" />
+      <div class="page-shell relative z-10">
+        <SectionIntro title="Held with care" align="left" tone="white" />
+
+        <dl class="mt-16 grid gap-10 sm:grid-cols-3">
+          {commitments.map((item, index) => (
+            <div class="commitment reveal border-t border-white/20 pt-6" style={`--reveal-delay:${index * 70}ms`}>
+              <div class="icon-tile grid size-12 place-items-center rounded-xl bg-white/10 text-rose">
+                <Icon name={item.icon} class="size-6" />
+              </div>
+              <dt class="mt-5 text-xl font-medium tracking-[-0.02em]">{item.title}</dt>
+              <dd class="mt-2 text-pretty leading-7 text-white/75">{item.detail}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+
     <section id="stories" class="section-space relative overflow-hidden bg-soft/80">
       <Icon name="flower" class="pointer-events-none absolute -right-10 top-10 size-56 rotate-12 text-bloom/[.035]" />
       <div class="page-shell relative z-10">
@@ -152,24 +301,46 @@ const testimonials = [
 
   <script>
     if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches && "IntersectionObserver" in window) {
+      const variants = {
+        default: {
+          duration: 520,
+          keyframes: [
+            { opacity: 0.82, transform: "translateY(14px)", filter: "blur(2px)" },
+            { opacity: 1, transform: "translateY(0)", filter: "blur(0)" },
+          ],
+        },
+        clip: {
+          duration: 760,
+          keyframes: [
+            { clipPath: "inset(0 0 100% 0)", transform: "scale(1.04)" },
+            { clipPath: "inset(0 0 0 0)", transform: "scale(1)" },
+          ],
+        },
+        stem: {
+          duration: 700,
+          keyframes: [{ transform: "scaleY(0)" }, { transform: "scaleY(1)" }],
+        },
+      };
+
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
 
-          const delay = Number.parseFloat(getComputedStyle(entry.target).getPropertyValue("--reveal-delay")) || 0;
-          entry.target.animate(
-            [
-              { opacity: 0.82, transform: "translateY(14px)", filter: "blur(2px)" },
-              { opacity: 1, transform: "translateY(0)", filter: "blur(0)" },
-            ],
-            { duration: 520, delay, easing: "cubic-bezier(.22, 1, .36, 1)", fill: "backwards" },
-          );
-          observer.unobserve(entry.target);
+          const target = entry.target as HTMLElement;
+          const variant = variants[target.dataset.reveal as keyof typeof variants] ?? variants.default;
+          const delay = Number.parseFloat(getComputedStyle(target).getPropertyValue("--reveal-delay")) || 0;
+
+          target.animate(variant.keyframes, {
+            duration: variant.duration,
+            delay,
+            easing: "cubic-bezier(.22, 1, .36, 1)",
+            fill: "backwards",
+          });
+          observer.unobserve(target);
         });
       }, { threshold: 0.12, rootMargin: "0px 0px -40px" });
 
-      document.querySelectorAll(".reveal").forEach((item) => observer.observe(item));
+      document.querySelectorAll(".reveal, .reveal-clip, .journey-stem").forEach((item) => observer.observe(item));
     }
-
   </script>
 </Baselayout>

@@ -118,3 +118,23 @@ details[open] .menu-surface {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
   .hero-copy > *, .hero-visual { opacity: 1; filter: none; transform: none; }
 }
+
+/* Section micro-interactions — transform/opacity only, gated to fine pointers. */
+.stat-item { transition: border-color 260ms ease, transform 220ms var(--ease-out-soft); }
+.journey-step { transition: transform 220ms var(--ease-out-soft); }
+.journey-dot { transition: transform 220ms var(--ease-out-soft), background-color 220ms ease; }
+.commitment .icon-tile { transition: transform 220ms var(--ease-out-soft), background-color 220ms ease; }
+
+@media (hover: hover) and (pointer: fine) {
+  .stat-item:hover { border-color: var(--color-bloom); transform: translateY(-3px); }
+  .journey-step:hover { transform: translateX(5px); }
+  .journey-step:hover .journey-dot { transform: scale(1.35); background-color: var(--color-bloom); }
+  .commitment:hover .icon-tile { transform: translateY(-3px); background-color: rgb(255 255 255 / .16); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stat-item:hover,
+  .journey-step:hover,
+  .journey-step:hover .journey-dot,
+  .commitment:hover .icon-tile { transform: none; }
+}
