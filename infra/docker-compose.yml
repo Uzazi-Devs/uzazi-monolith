@@ -4,20 +4,20 @@ services:
   postgres:
     image: postgres:16-alpine
     environment:
-      POSTGRES_USER: uzazi
-      POSTGRES_PASSWORD: uzazi
-      POSTGRES_DB: uzazi
-    ports: ["5432:5432"]
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports: ["${POSTGRES_PORT:-5432}:5432"]
     volumes: ["pgdata:/var/lib/postgresql/data"]
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U uzazi"]
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER:-uzazi}"]
       interval: 3s
       timeout: 3s
       retries: 10
 
   redis:
     image: redis:7-alpine
-    ports: ["6379:6379"]
+    ports: ["${REDIS_PORT:-6379}:6379"]
 
   # Runs db/migrations against postgres ONCE, before backend/auth-service.
   # This is the only migration runner — no ORM auto-migrates on its own.
@@ -27,7 +27,7 @@ services:
     command:
       [
         "-path=/migrations",
-        "-database=postgres://uzazi:uzazi@postgres:5432/uzazi?sslmode=disable",
+        "-database=${DATABASE_URL}",
         "up",
       ]
     depends_on:
@@ -40,53 +40,59 @@ services:
       context: ..
       dockerfile: services/auth-service/Dockerfile
     environment:
-      DATABASE_URL: postgres://uzazi:uzazi@postgres:5432/uzazi?sslmode=disable
-      BETTER_AUTH_URL: http://localhost:3000
-      BETTER_AUTH_SECRET: dev-secret-change-me-0123456789abcdef
-      NEXT_PUBLIC_AUTH_URL: http://localhost:3000
+      DATABASE_URL: ${DATABASE_URL}
+      BETTER_AUTH_URL: ${BETTER_AUTH_URL}
+      BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET}
+      NEXT_PUBLIC_AUTH_URL: ${NEXT_PUBLIC_AUTH_URL}
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
     depends_on:
       migrate:
         condition: service_completed_successfully
-    ports: ["3000:3000"]
+    ports: ["${AUTH_PORT:-3000}:3000"]
 
   backend:
     build: ../backend
     environment:
-      PORT: "8080"
-      DATABASE_URL: postgres://uzazi:uzazi@postgres:5432/uzazi?sslmode=disable
-      AUTH_JWKS_URL: http://auth-service:3000/api/auth/jwks
-      AI_PROVIDER: gemma
-      REDIS_URL: redis://redis:6379
-      # Dev-only defaults — override for any real deployment.
-      ADMIN_USER: admin
-      ADMIN_PASS: changeme
-      CORS_ALLOWED_ORIGINS: http://uzazi.localhost,http://localhost:4321
+      PORT: ${BACKEND_PORT:-8080}
+      DATABASE_URL: ${DATABASE_URL}
+      AUTH_JWKS_URL: ${AUTH_JWKS_URL}
+      AI_PROVIDER: ${AI_PROVIDER}
+      REDIS_URL: ${REDIS_URL}
+      ADMIN_USER: ${ADMIN_USER}
+      ADMIN_PASS: ${ADMIN_PASS}
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS}
     depends_on:
       migrate:
         condition: service_completed_successfully
-    ports: ["8080:8080"]
+    ports: ["${BACKEND_PORT:-8080}:8080"]
 
-  # Frontends run their dev servers straight from the mounted source — no
-  # per-frontend Dockerfile needed for local dev.
+  # Frontends can build optimized production images or mount source for local dev
   marketing-astro:
-    image: oven/bun:1-alpine
+    build:
+      context: ..
+      dockerfile: frontends/marketing-astro/Dockerfile
     working_dir: /app
     volumes: ["../frontends/marketing-astro:/app"]
     command: sh -c "bun install && bun run dev"
     environment:
-      PUBLIC_AUTH_URL: http://localhost:3000
-      PUBLIC_BACKEND_URL: http://localhost:8080
-    ports: ["4321:4321"]
+      PUBLIC_AUTH_URL: ${PUBLIC_AUTH_URL}
+      PUBLIC_BACKEND_URL: ${PUBLIC_BACKEND_URL}
+      PUBLIC_WAITLIST_FORM_ENDPOINT: ${PUBLIC_WAITLIST_FORM_ENDPOINT}
+    ports: ["${MARKETING_PORT:-4321}:4321"]
 
   app-nextjs:
-    image: oven/bun:1-alpine
+    build:
+      context: ..
+      dockerfile: frontends/app-nextjs/Dockerfile
     working_dir: /app
     volumes: ["../frontends/app-nextjs:/app"]
     command: sh -c "bun install && bun run dev"
     environment:
-      NEXT_PUBLIC_AUTH_URL: http://localhost:3000
-      NEXT_PUBLIC_BACKEND_URL: http://localhost:8080
-    ports: ["3001:3001"]
+      NEXT_PUBLIC_AUTH_URL: ${NEXT_PUBLIC_AUTH_URL}
+      NEXT_PUBLIC_BACKEND_URL: ${NEXT_PUBLIC_BACKEND_URL}
+    ports: ["${APP_PORT:-3001}:3001"]
+
 
   caddy:
     image: caddy:2-alpine
@@ -100,3 +106,4 @@ services:
 
 volumes:
   pgdata:
+
