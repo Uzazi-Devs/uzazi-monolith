@@ -1,5 +1,5 @@
 import { betterAuth } from "better-auth";
-import { bearer, jwt } from "better-auth/plugins";
+import { bearer, jwt, haveIBeenPwned, admin } from "better-auth/plugins";
 import { Pool } from "pg";
 
 const googleClientId = process.env.GOOGLE_CLIENT_ID;
@@ -33,6 +33,7 @@ const socialProviders =
         },
       }
     : {};
+
 export const auth = betterAuth({
   database: new Pool({ connectionString: process.env.DATABASE_URL }),
   baseURL: process.env.BETTER_AUTH_URL ?? "http://localhost:3000",
@@ -42,8 +43,14 @@ export const auth = betterAuth({
 
   socialProviders,
 
+  rateLimit: {
+    enabled: true,
+    window: 60,
+    max: 20,
+  },
+
   // jwt() publishes a JWKS at /api/auth/jwks — the Go backend verifies tokens
   // against it. bearer() lets non-cookie clients authenticate with
   // `Authorization: Bearer <token>`.
-  plugins: [jwt(), bearer()],
+  plugins: [jwt(), bearer(), admin(), haveIBeenPwned()],
 });

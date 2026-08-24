@@ -10,8 +10,6 @@
 #     echo -n "$(openssl rand -base64 32)"   | gcloud secrets create uzazi-better-auth-secret   --data-file=-
 #     echo -n "$GOOGLE_CLIENT_ID"            | gcloud secrets create uzazi-google-client-id     --data-file=-
 #     echo -n "$GOOGLE_CLIENT_SECRET"        | gcloud secrets create uzazi-google-client-secret --data-file=-
-#     echo -n "admin"                        | gcloud secrets create uzazi-admin-user           --data-file=-
-#     echo -n "$(openssl rand -base64 24)"   | gcloud secrets create uzazi-admin-pass           --data-file=-
 #
 #   Run migrations against Neon once:
 #     migrate -path db/migrations -database "$NEON_CONNECTION_STRING" up
@@ -50,7 +48,7 @@ gcloud run deploy uzazi-backend \
   --region "$REGION" \
   --allow-unauthenticated \
   --set-env-vars AUTH_JWKS_URL="${AUTH_URL}/api/auth/jwks",AI_PROVIDER="${AI_PROVIDER:-none}",CORS_ALLOWED_ORIGINS="${CORS_ALLOWED_ORIGINS:?set CORS_ALLOWED_ORIGINS to your frontend origin(s)}" \
-  --set-secrets DATABASE_URL=uzazi-database-url:latest,ADMIN_USER=uzazi-admin-user:latest,ADMIN_PASS=uzazi-admin-pass:latest
+  --set-secrets DATABASE_URL=uzazi-database-url:latest
 
 BACKEND_URL=$(gcloud run services describe uzazi-backend --region "$REGION" --format='value(status.url)')
 
