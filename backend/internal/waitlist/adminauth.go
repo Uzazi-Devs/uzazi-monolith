@@ -4,6 +4,8 @@ import (
 	"crypto/subtle"
 	"net/http"
 	"os"
+
+	"github.com/Uzazi-Devs/uzazi-monolith/backend/internal/httpx"
 )
 
 // RequireAdmin gates a handler behind HTTP Basic Auth, checked against the
@@ -21,7 +23,7 @@ func RequireAdmin(next http.HandlerFunc) http.HandlerFunc {
 
 		if !ok || wantUser == "" || wantPass == "" || !userMatch || !passMatch {
 			w.Header().Set("WWW-Authenticate", `Basic realm="waitlist admin"`)
-			writeError(w, http.StatusUnauthorized, "unauthorized")
+			httpx.WriteError(w, http.StatusUnauthorized, "unauthorized")
 			return
 		}
 
