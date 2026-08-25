@@ -24,8 +24,12 @@ One-time setup, values never go in the repo:
 | `uzazi-better-auth-secret` | `openssl rand -base64 32` |
 | `uzazi-google-client-id` | from Google Cloud Console OAuth client |
 | `uzazi-google-client-secret` | same |
-| `uzazi-admin-user` | your choice, for `/admin` basic auth |
-| `uzazi-admin-pass` | `openssl rand -base64 24` |
+
+`/admin/*` routes are gated by a BetterAuth JWT with `role: "admin"`, not a
+separate credential — sign up normally, then promote the account once:
+```sql
+UPDATE "user" SET role = 'admin' WHERE email = 'you@example.com';
+```
 
 ## 3. Google OAuth console
 

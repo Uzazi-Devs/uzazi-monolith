@@ -10,7 +10,7 @@ import (
 )
 
 const getSessionByToken = `-- name: GetSessionByToken :one
-SELECT id, "userId", token, "expiresAt", "ipAddress", "userAgent", "createdAt", "updatedAt" FROM "session" WHERE "token" = $1
+SELECT id, "userId", token, "expiresAt", "ipAddress", "userAgent", "createdAt", "updatedAt", "impersonatedBy" FROM "session" WHERE "token" = $1
 `
 
 func (q *Queries) GetSessionByToken(ctx context.Context, token string) (Session, error) {
@@ -25,12 +25,13 @@ func (q *Queries) GetSessionByToken(ctx context.Context, token string) (Session,
 		&i.UserAgent,
 		&i.CreatedAt,
 		&i.UpdatedAt,
+		&i.ImpersonatedBy,
 	)
 	return i, err
 }
 
 const getUserByID = `-- name: GetUserByID :one
-SELECT id, name, email, "emailVerified", image, "createdAt", "updatedAt" FROM "user" WHERE "id" = $1
+SELECT id, name, email, "emailVerified", image, "createdAt", "updatedAt", role, banned, "banReason", "banExpires" FROM "user" WHERE "id" = $1
 `
 
 func (q *Queries) GetUserByID(ctx context.Context, id string) (User, error) {
@@ -44,6 +45,10 @@ func (q *Queries) GetUserByID(ctx context.Context, id string) (User, error) {
 		&i.Image,
 		&i.CreatedAt,
 		&i.UpdatedAt,
+		&i.Role,
+		&i.Banned,
+		&i.BanReason,
+		&i.BanExpires,
 	)
 	return i, err
 }

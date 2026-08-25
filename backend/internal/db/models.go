@@ -51,14 +51,15 @@ type MediaObject struct {
 }
 
 type Session struct {
-	ID        string             `json:"id"`
-	UserId    string             `json:"userId"`
-	Token     string             `json:"token"`
-	ExpiresAt pgtype.Timestamptz `json:"expiresAt"`
-	IpAddress pgtype.Text        `json:"ipAddress"`
-	UserAgent pgtype.Text        `json:"userAgent"`
-	CreatedAt pgtype.Timestamptz `json:"createdAt"`
-	UpdatedAt pgtype.Timestamptz `json:"updatedAt"`
+	ID             string             `json:"id"`
+	UserId         string             `json:"userId"`
+	Token          string             `json:"token"`
+	ExpiresAt      pgtype.Timestamptz `json:"expiresAt"`
+	IpAddress      pgtype.Text        `json:"ipAddress"`
+	UserAgent      pgtype.Text        `json:"userAgent"`
+	CreatedAt      pgtype.Timestamptz `json:"createdAt"`
+	UpdatedAt      pgtype.Timestamptz `json:"updatedAt"`
+	ImpersonatedBy pgtype.Text        `json:"impersonatedBy"`
 }
 
 type User struct {
@@ -69,6 +70,10 @@ type User struct {
 	Image         pgtype.Text        `json:"image"`
 	CreatedAt     pgtype.Timestamptz `json:"createdAt"`
 	UpdatedAt     pgtype.Timestamptz `json:"updatedAt"`
+	Role          pgtype.Text        `json:"role"`
+	Banned        bool               `json:"banned"`
+	BanReason     pgtype.Text        `json:"banReason"`
+	BanExpires    pgtype.Timestamptz `json:"banExpires"`
 }
 
 type Verification struct {

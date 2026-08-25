@@ -1,32 +1,34 @@
 package waitlist
 
 import (
-	"crypto/subtle"
 	"net/http"
-	"os"
+	"strings"
 
+	"github.com/Uzazi-Devs/uzazi-monolith/backend/internal/authjwt"
 	"github.com/Uzazi-Devs/uzazi-monolith/backend/internal/httpx"
 )
 
-// RequireAdmin gates a handler behind HTTP Basic Auth, checked against the
-// ADMIN_USER/ADMIN_PASS env vars. There's no JWT/session verification
-// anywhere in this backend yet, so Basic Auth is the smallest thing that
-// keeps signup PII off the open internet until that exists.
-func RequireAdmin(next http.HandlerFunc) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		wantUser := os.Getenv("ADMIN_USER")
-		wantPass := os.Getenv("ADMIN_PASS")
+// RequireAdmin gates a handler behind a BetterAuth JWT (Authorization:
+// Bearer <token>, verified against AUTH_JWKS_URL) whose role claim is
+// "admin" — the role services/auth-service's admin() plugin assigns.
+func RequireAdmin(verifier *authjwt.Verifier) func(http.HandlerFunc) http.HandlerFunc {
+	return func(next http.HandlerFunc) http.HandlerFunc {
+		return func(w http.ResponseWriter, r *http.Request) {
+			token, ok := strings.CutPrefix(r.Header.Get("Authorization"), "Bearer ")
+			if !ok || token == "" {
+				w.Header().Set("WWW-Authenticate", `Bearer realm="waitlist admin"`)
+				httpx.WriteError(w, http.StatusUnauthorized, "unauthorized")
+				return
+			}
 
-		user, pass, ok := r.BasicAuth()
-		userMatch := subtle.ConstantTimeCompare([]byte(user), []byte(wantUser)) == 1
-		passMatch := subtle.ConstantTimeCompare([]byte(pass), []byte(wantPass)) == 1
+			claims, err := verifier.Verify(token)
+			if err != nil || claims.Role != "admin" {
+				w.Header().Set("WWW-Authenticate", `Bearer realm="waitlist admin"`)
+				httpx.WriteError(w, http.StatusUnauthorized, "unauthorized")
+				return
+			}
 
-		if !ok || wantUser == "" || wantPass == "" || !userMatch || !passMatch {
-			w.Header().Set("WWW-Authenticate", `Basic realm="waitlist admin"`)
-			httpx.WriteError(w, http.StatusUnauthorized, "unauthorized")
-			return
+			next(w, r)
 		}
-
-		next(w, r)
 	}
 }
